@@ -1,4 +1,4 @@
-The code for Shm's Cool Drawing App!
+This is Oliver's Branch
 
 <img src="https://i.imgur.com/6L4OUS7.png" width="300" alt= "Shm's Drawing Application Image Preview">
 
