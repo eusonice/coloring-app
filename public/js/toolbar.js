@@ -35,22 +35,53 @@ const sliders = [
   },
 ];
 
+const solidColors = ["#2c99f2", "#31db57", "#ffe43e", "#ee4b2e"];
+
 /* 
 A preview of the current brush stroke based on the current brush settings.
 Which are the current color, width, and angle.
-The element id for preview is: #stroke-preview
+The element class is .stroke-preview.
 */
+let previewIntervalId;
+function showPreviewPopover() {
+  // show #stroke-preview-popover, if the stroke preview has class opacity-100, otherwise wait 2 seconds change class opacity-100 to opacity-0
+  // clear the interval if it exists
+  if (previewIntervalId) {
+    clearInterval(previewIntervalId);
+  }
+  const previewPopover = document.querySelector("#stroke-preview-popover");
+  if (previewPopover.classList.contains("opacity-0")) {
+    previewPopover.classList.remove("opacity-0");
+    previewPopover.classList.add("opacity-100");
+  } else {
+    previewIntervalId = setInterval(() => {
+      previewPopover.classList.remove("opacity-100");
+      previewPopover.classList.add("opacity-0");
+      clearInterval(previewIntervalId);
+    }, 2000);
+  }
+}
+function initPreviewPopover() {
+  // when the first time the slider is updated, #stroke-preview-popover will be shown by removing class invisible
+  const strokePreivewPopover = document.querySelector(
+    "#stroke-preview-popover"
+  );
+  if (strokePreivewPopover.classList.contains("invisible")) {
+    strokePreivewPopover.classList.remove("invisible");
+  }
+}
 
 function updateStrokePreview() {
-  const preview = $("#stroke-preview");
+  const previews = document.querySelectorAll(".stroke-preview");
   const width = $("#slider-width").val();
   const height = $("#slider-height").val();
   const angle = $("#slider-angle").val();
-  preview.css({
-    width: width * 0.7,
-    height: height * 0.7,
-    transform: `rotate(${angle}deg)`,
+  previews.forEach((el) => {
+    el.style.width = width * 0.7 + "px";
+    el.style.height = height * 0.7 + "px";
+    el.style.transform = `rotate(${angle}deg)`;
   });
+  showPreviewPopover();
 }
 
 function updateSlider(id, value, min, max) {
@@ -74,7 +105,6 @@ function updateSlider(id, value, min, max) {
     "background",
     `linear-gradient(to right, rgb(192 132 252) ${percent}%, rgb(229 231 235) ${percent}%)`
   );
-
   // update the preview
   updateStrokePreview();
 }
@@ -82,9 +112,11 @@ function updateSlider(id, value, min, max) {
 sliders.forEach((slider) => {
   updateSlider(slider.id, slider.value, slider.min, slider.max);
   $(`#slider-${slider.id}`).on("input", function () {
+    initPreviewPopover();
     updateSlider(slider.id, $(this).val(), slider.min, slider.max);
   });
   $(`#slider-input-${slider.id}`).on("input", function () {
+    initPreviewPopover();
     updateSlider(slider.id, $(this).val(), slider.min, slider.max);
   });
 });
@@ -96,10 +128,28 @@ The element id for the color picker is: #color-picker
 A backdrop is added to the color picker to prevent it from being clicked.
 */
 
+/* 
+This code to check hex light/dark value is sourced here:
+wc_hex_is_light: https://github.com/woocommerce/woocommerce/blob/master/includes/wc-formatting-functions.php
+*/
+
+function isLight(color) {
+  const hex = color.replace("#", "");
+  const c_r = parseInt(hex.substr(0, 2), 16);
+  const c_g = parseInt(hex.substr(2, 2), 16);
+  const c_b = parseInt(hex.substr(4, 2), 16);
+  const brightness = (c_r * 299 + c_g * 587 + c_b * 114) / 1000;
+  return brightness > 155;
+}
+
 function updateCurrentColor(newColor) {
   document.querySelectorAll(".current-brush-color").forEach((el) => {
     el.style.backgroundColor = newColor;
     el.style.fill = newColor;
+  });
+  // update .current-brush-color-bg based on isLight(newColor)
+  document.querySelectorAll(".current-brush-color-bg").forEach((el) => {
+    el.style.backgroundColor = isLight(newColor) ? "#48494a" : "#fff";
   });
 }
 
@@ -119,9 +169,28 @@ $("#color-picker-backdrop").on("click", function () {
 When any .btn-solid-picker is clicked, the color of the button will be set to the current color.
 */
 
-$(".btn-solid-picker").on("click", function () {
+$(".btn-solid-picker").on("click", function (e) {
+  // remove active class from all .btn-solid-picker
+  $(".btn-solid-picker").removeClass("active");
   const color = $(this).css("background-color");
+  // add active class to the button that was clicked
+  $(this).addClass("active");
   updateCurrentColor(color);
 });
 
-updateCurrentColor("#2c99f2");
+/* 
+For each .btn-solid-picker, apply the color from solidColors array.
+*/
+
+const solidPickers = document.querySelectorAll(".btn-solid-picker");
+solidPickers.forEach((el, key) => {
+  el.style.backgroundColor = solidColors[key];
+  el.style.fill = solidColors[key];
+});
+
+/* 
+  The inital color of the brush is set to #2c99f2, 
+  In later phase, it will be replaced by localstorage.getItem("current-brush-color")
+*/
+
+updateCurrentColor("#2c99f2"); // default blue
