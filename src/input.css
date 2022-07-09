@@ -32,12 +32,24 @@
     appearance: none;
   }
   .preview-circle {
+    @apply transition-colors;
     box-shadow: 2px -1px 24px -8px rgba(0, 0, 0, 0.2) inset;
     -webkit-box-shadow: 2px -1px 24px -8px rgba(0, 0, 0, 0.2) inset;
     -moz-box-shadow: 2px -1px 24px -8px rgba(0, 0, 0, 0.2) inset;
   }
   .current-brush-color {
     @apply transition-colors;
+  }
+  /* https://csslayout.io/popover-arrow/ */
+  .container__arrow--tc {
+    /* Position at the top center */
+    left: 50%;
+    top: 0px;
+
+    /* Border */
+    /* border-left: 1px solid rgba(0, 0, 0, 0.3);
+    border-top: 1px solid rgba(0, 0, 0, 0.3); */
+    transform: translate(-50%, -50%) rotate(45deg);
   }
 }
 
