@@ -1,0 +1,48 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer components {
+  .btn-icon-primary {
+    @apply flex h-10 w-10 items-center justify-center rounded-full text-gray-700 transition hover:bg-purple-50 active:bg-purple-100 [&>span]:hover:text-purple-700 [&>span]:active:text-purple-900;
+  }
+
+  .btn-icon-danger {
+    @apply flex h-10 w-10 items-center justify-center rounded-full text-gray-700 transition hover:bg-red-50 active:bg-red-100 [&>span]:hover:text-red-700 [&>span]:active:text-red-900;
+  }
+
+  .btn-icon-success {
+    @apply flex h-10 w-10 items-center justify-center rounded-full text-gray-700 transition hover:bg-green-50 active:bg-green-100 [&>span]:hover:text-green-700 [&>span]:active:text-green-900;
+  }
+
+  .btn-icon-warning {
+    @apply flex h-10 w-10 items-center justify-center rounded-full text-gray-700 transition hover:bg-orange-50 active:bg-orange-100 [&>span]:hover:text-orange-700 [&>span]:active:text-orange-900;
+  }
+
+  .btn-icon-info {
+    @apply flex h-10 w-10 items-center justify-center rounded-full text-gray-700 transition hover:bg-blue-50 active:bg-blue-100 [&>span]:hover:text-blue-700 [&>span]:active:text-blue-900;
+  }
+  .btn-icon-secondary {
+    @apply flex h-10 w-10 items-center justify-center rounded-full bg-gray-100 text-gray-700 transition hover:bg-gray-200 active:bg-gray-300 [&>span]:hover:text-gray-700 [&>span]:active:text-gray-900;
+  }
+
+  .app-slider::-webkit-slider-thumb {
+    @apply h-6 w-6 rounded-full bg-white shadow-md shadow-gray-400/50 ring-1 ring-inset ring-gray-100 transition hover:scale-105 active:shadow-gray-400;
+    -webkit-appearance: none;
+    appearance: none;
+  }
+  .preview-circle {
+    box-shadow: 2px -1px 24px -8px rgba(0, 0, 0, 0.2) inset;
+    -webkit-box-shadow: 2px -1px 24px -8px rgba(0, 0, 0, 0.2) inset;
+    -moz-box-shadow: 2px -1px 24px -8px rgba(0, 0, 0, 0.2) inset;
+  }
+  .current-brush-color {
+    @apply transition-colors;
+  }
+}
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}

@@ -62,9 +62,9 @@ function updateGUI(){
     brushCircle.scale((currentWidth/2) / (brushCircle.bounds.width / 2));
 
     //redraw the border around the canvas
-    var border = new Path.Rectangle(0, 0, 800, 600);
-    border.strokeColor = 'black';
-    border.strokeWidth = 5;
+    // var border = new Path.Rectangle(0, 0, 800, 600);
+    // border.strokeColor = 'black';
+    // border.strokeWidth = 5;
 }
 
 // -- button functionality --//
