@@ -189,9 +189,9 @@ List of shortcuts:
     | `shift` + `left` | Decrease brush width | Decrease brush width by 10 |
     | `right` | Increase brush width | Increase brush width by 5 |
     | `shift` + `right` | Increase brush width | Increase brush width by 10 |
-    | `shift` + `d` | Increase brush angle | Increase brush angle by 5 degrees |
-    | `shift` + `d` | Decrease brush angle | Decrease brush angle by 15 degrees |
-    | `shift` + `a` | Decrease brush angle | Decrease brush angle by 5 degrees |
+    | `e` | Increase brush angle | Increase brush angle by 5 degrees |
+    | `shift` + `e` | Increase brush angle | Increase brush angle by 15 degrees |
+    | `q` | Increase brush angle | Increase brush angle by 5 degrees |
     | `shift` + `q` | Decrease brush angle | Decrease brush angle by 15 degrees |
     | `shift` + `/` | Help | Show help |
 

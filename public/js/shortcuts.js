@@ -33,9 +33,9 @@ import { updateCurrentColor } from "./color-picker.js";
         - shift + left, shift + a = decrease brush width by 10
         - right, d = increase brush width by 5
         - shift + right, shift + d = increase brush width by 10
-        - shift + d, e = increase brush angle by 5 degrees
-        - shift + d = decrease brush angle by 15 degrees
-        - shift + a, q = decrease brush angle by 5 degrees
+        - e = increase brush angle by 5 degrees
+        - shift + e = increase brush angle by 15 degrees
+        - q = decrease brush angle by 5 degrees
         - shift + q = decrease brush angle by 15 degrees
         - shift + / = (?) = show help
 */
@@ -157,17 +157,17 @@ export const shortcuts = [
     description: "Increase brush width by 10",
   },
   {
-    triggers: ["shift+d", "e"],
+    triggers: ["e"],
     name: "Increase brush angle",
     description: "Increase brush angle by 5 degrees",
   },
   {
-    triggers: ["shift+d"],
+    triggers: ["shift+e"],
     name: "Decrease brush angle",
     description: "Decrease brush angle by 15 degrees",
   },
   {
-    triggers: ["shift+a", "q"],
+    triggers: ["q"],
     name: "Decrease brush angle",
     description: "Decrease brush angle by 5 degrees",
   },
@@ -262,12 +262,12 @@ keyboardJS.bind(["up", "w"], (e) => {
 
 // SHORTCUT --- increase brush width by 10 --- shift + arrow right, shift + d
 
-// SHORTCUT --- increase brush angle by 5 degrees --- shift + d
+// SHORTCUT --- increase brush angle by 5 --- e
 
-// SHORTCUT --- decrease brush angle by 15 degrees --- shift + d
+// SHORTCUT --- increase brush angle by 15 --- shift + e
 
-// SHORTCUT --- decrease brush angle by 5 degrees --- shift + a
+// SHORTCUT --- decrease brush angle by 5 --- q
 
-// SHORTCUT --- decrease brush angle by 15 degrees --- shift + q
+// SHORTCUT --- decrease brush angle by 15 --- shift + q
 
-// SHORTCUT --- (?) --- shift + /
+// SHORTCUT --- help (?) --- shift + /
