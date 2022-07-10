@@ -44,21 +44,55 @@
   .current-brush-color {
     @apply transition-colors;
   }
-  /* https://csslayout.io/popover-arrow/ */
-  .container__arrow--tc {
-    /* Position at the top center */
-    left: 50%;
-    top: 0px;
-
-    /* Border */
-    /* border-left: 1px solid rgba(0, 0, 0, 0.3);
-    border-top: 1px solid rgba(0, 0, 0, 0.3); */
-    transform: translate(-50%, -50%) rotate(45deg);
-  }
 
   .button-focus-default:focus-visible {
     @apply focus:ring-2 focus:ring-gray-500 focus:ring-offset-2;
   }
+  .btn-solid-picker {
+    @apply relative flex h-9 w-9 items-center justify-center rounded-full ring-gray-700 transition hover:ring-2 hover:ring-gray-500 hover:ring-offset-2 active:scale-95 [&.active_>span]:opacity-100 [&_>span]:opacity-0;
+  }
+  .btn-solid-picker-ring {
+    @apply h-6 w-6 rounded-full ring-2 ring-white transition-opacity;
+  }
+  .color-removeable-wrap {
+    @apply -mb-5 h-14;
+  }
+  .color-removeable-wrap .btn-solid-remove {
+    @apply pointer-events-none absolute bottom-14 -left-3 z-10 mx-auto cursor-pointer rounded-lg border border-gray-900 bg-gray-800 !py-1 !px-2 text-sm text-white opacity-0 shadow-lg shadow-gray-300/30 transition delay-75 mb-1;
+  }
+  .color-removeable-wrap:hover .btn-solid-remove {
+    @apply pointer-events-auto opacity-100 delay-500;
+  }
+  .color-removeable-wrap .btn-solid-remove::after {
+    @apply absolute bg-gray-800 content-[""] w-4 h-4 rounded;
+    left: 50%;
+    top: 100%;
+    transform: translate(-50%, -50%) rotate(135deg);
+  }
+}
+
+/* https://csslayout.io/popover-arrow/ */
+.container__arrow--tc {
+  /* Position at the top center */
+  left: 50%;
+  top: 0px;
+
+  /* Border */
+  /* border-left: 1px solid rgba(0, 0, 0, 0.3);
+    border-top: 1px solid rgba(0, 0, 0, 0.3); */
+  transform: translate(-50%, -50%) rotate(45deg);
+}
+.container__arrow--bc {
+  /* Position at the bottom center */
+  left: 50%;
+  top: 100%;
+  transform: translate(-50%, -50%) rotate(135deg);
+}
+.container__arrow--bl {
+  /* Position at the bottom left */
+  left: 18px;
+  top: calc(100% - 2px);
+  transform: translate(-50%, -50%) rotate(225deg);
 }
 
 input::-webkit-outer-spin-button,
