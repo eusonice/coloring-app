@@ -25,13 +25,16 @@ This is Oliver's Branch
 | `b` | Brush | Switch to brush tool |
 | `e` | Eraser | Switch to eraser tool |
 | `c` | Color Picker | Switch to color picker tool |
-| `alt` + `1` | First solid color | Switch to 1st solid color |
-| `alt` + `2` | Second solid color | Switch to 2nd solid color |
-| `alt` + `3` | Third solid color | Switch to 3rd solid color |
-| `alt` + `4` | Fourth solid color | Switch to 4th solid color |
-| `alt` + `5` | First gradient color | Switch to 1st gradient color |
-| `alt` + `6` | Second gradient color | Switch to 2nd gradient color |
-| `alt` + `7` | Third gradient color | Switch to 3rd gradient color |
+| `alt` + `1` | First solid or custom color | Switch to 1st solid color, or 1st custom color in color picker mode |
+| `alt` + `2` | Second solid or custom color | Switch to 2nd solid color, or 2nd custom color in color picker mode |
+| `alt` + `3` | Third solid or custom color | Switch to 3rd solid color, or 3rd custom color in color picker mode |
+| `alt` + `4` | Fourth solid or custom color | Switch to 4th solid color, or 4th custom color in color picker mode |
+| `alt` + `5` | First gradient color or fifth custom color | Switch to 1st gradient color, or 5th custom color in color picker mode |
+| `alt` + `6` | Second gradient color or sixth custom color | Switch to 2nd gradient color, or 6th custom color in color picker mode |
+| `alt` + `7` | Third gradient color or seventh custom color | Switch to 3rd gradient color, or 7th custom color in color picker mode |
+| `alt` + `8` | Eighth custom color | Switch to 8th custom color in color picker mode |
+| `alt` + `9` | Ninth custom color | Switch to 9th custom color in color picker mode |
+| `alt` + `0` | Tenth custom color | Switch to 10th custom color in color picker mode |
 | `z` | Zoom in | Zoom in |
 | `x` | Zoom out | Zoom out |
 | `up` | Increase brush height | Increase brush height by 5 |
