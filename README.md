@@ -164,36 +164,36 @@ List of shortcuts:
 
 ## Shortcut table
 
-    | Shortcut | Action | Description |
-    | -------- | ------ | ----------- |
-    | `mod` + `s` | Save | Save the current drawing |
-    | `mod` + `z` | Undo | Undo the last action |
-    | `mod` + `shift` + `z` | Redo | Redo the last action |
-    | `b` | Brush | Switch to brush tool |
-    | `e` | Eraser | Switch to eraser tool |
-    | `c` | Color Picker | Switch to color picker tool |
-    | `alt` + `1` | First solid color | Switch to 1st solid color |
-    | `alt` + `2` | Second solid color | Switch to 2nd solid color |
-    | `alt` + `3` | Third solid color | Switch to 3rd solid color |
-    | `alt` + `4` | Fourth solid color | Switch to 4th solid color |
-    | `alt` + `5` | First gradient color | Switch to 1st gradient color |
-    | `alt` + `6` | Second gradient color | Switch to 2nd gradient color |
-    | `alt` + `7` | Third gradient color | Switch to 3rd gradient color |
-    | `z` | Zoom in | Zoom in |
-    | `x` | Zoom out | Zoom out |
-    | `up` | Increase brush height | Increase brush height by 5 |
-    | `shift` + `up` | Increase brush height | Increase brush height by 10 |
-    | `down` | Decrease brush height | Decrease brush height by 5 |
-    | `shift` + `down` | Decrease brush height | Decrease brush height by 10 |
-    | `left` | Decrease brush width | Decrease brush width by 5 |
-    | `shift` + `left` | Decrease brush width | Decrease brush width by 10 |
-    | `right` | Increase brush width | Increase brush width by 5 |
-    | `shift` + `right` | Increase brush width | Increase brush width by 10 |
-    | `shift` + `d` | Increase brush angle | Increase brush angle by 5 degrees |
-    | `shift` + `d` | Decrease brush angle | Decrease brush angle by 15 degrees |
-    | `shift` + `a` | Decrease brush angle | Decrease brush angle by 5 degrees |
-    | `shift` + `q` | Decrease brush angle | Decrease brush angle by 15 degrees |
-    | `shift` + `/` | Help | Show help |
+| Shortcut | Action | Description |
+| -------- | ------ | ----------- |
+| `mod` + `s` | Save | Save the current drawing |
+| `mod` + `z` | Undo | Undo the last action |
+| `mod` + `shift` + `z` | Redo | Redo the last action |
+| `b` | Brush | Switch to brush tool |
+| `e` | Eraser | Switch to eraser tool |
+| `c` | Color Picker | Switch to color picker tool |
+| `alt` + `1` | First solid color | Switch to 1st solid color |
+| `alt` + `2` | Second solid color | Switch to 2nd solid color |
+| `alt` + `3` | Third solid color | Switch to 3rd solid color |
+| `alt` + `4` | Fourth solid color | Switch to 4th solid color |
+| `alt` + `5` | First gradient color | Switch to 1st gradient color |
+| `alt` + `6` | Second gradient color | Switch to 2nd gradient color |
+| `alt` + `7` | Third gradient color | Switch to 3rd gradient color |
+| `z` | Zoom in | Zoom in |
+| `x` | Zoom out | Zoom out |
+| `up` | Increase brush height | Increase brush height by 5 |
+| `shift` + `up` | Increase brush height | Increase brush height by 10 |
+| `down` | Decrease brush height | Decrease brush height by 5 |
+| `shift` + `down` | Decrease brush height | Decrease brush height by 10 |
+| `left` | Decrease brush width | Decrease brush width by 5 |
+| `shift` + `left` | Decrease brush width | Decrease brush width by 10 |
+| `right` | Increase brush width | Increase brush width by 5 |
+| `shift` + `right` | Increase brush width | Increase brush width by 10 |
+| `shift` + `d` | Increase brush angle | Increase brush angle by 5 degrees |
+| `shift` + `d` | Decrease brush angle | Decrease brush angle by 15 degrees |
+| `shift` + `a` | Decrease brush angle | Decrease brush angle by 5 degrees |
+| `shift` + `q` | Decrease brush angle | Decrease brush angle by 15 degrees |
+| `shift` + `/` | Help | Show help |
 
 ![5FC0A29D-F443-412C-A340-FC0147D70D94](https://user-images.githubusercontent.com/13263720/178132307-8288c94b-d16c-4b5e-b211-3f3685bc7bc2.png)
 
