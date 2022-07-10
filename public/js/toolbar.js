@@ -1,8 +1,8 @@
 import "./color-picker.js";
 import { setStorage, getStorage } from "./storage.js";
 import { isLight } from "./util.js";
-/*
- 
+
+/* 
 There are three range sliders in this file.
 Each slider has an input field and a slider.
 The input field is used to set the value of the slider.
@@ -45,7 +45,9 @@ A preview of the current brush stroke based on the current brush settings.
 Which are the current color, width, and angle.
 The element class is .stroke-preview.
 */
-let previewIntervalId;
+
+let previewIntervalId; // this value is to determine whether the preview popover is shown
+
 function showPreviewPopover() {
   // show #stroke-preview-popover, if the stroke preview has class opacity-100, otherwise wait 2 seconds change class opacity-100 to opacity-0
   // clear the interval if it exists
