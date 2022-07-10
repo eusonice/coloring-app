@@ -22,19 +22,19 @@ const sliders = [
     id: "width",
     min: 1,
     max: 100,
-    value: 16,
+    value: getStorage("width") || 16,
   },
   {
     id: "height",
     min: 1,
     max: 100,
-    value: 28,
+    value: getStorage("height") || 28,
   },
   {
     id: "angle",
     min: 0,
     max: 180,
-    value: 160,
+    value: getStorage("angle") || 160,
   },
 ];
 
@@ -110,6 +110,8 @@ function updateSlider(id, value, min, max) {
   );
   // update the preview
   updateStrokePreview();
+  // store the value to local storage based on id
+  setStorage(id, value);
 }
 
 sliders.forEach((slider) => {
