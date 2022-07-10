@@ -1,3 +1,6 @@
+import "./color-picker.js";
+import { setStorage, getStorage } from "./storage.js";
+import { isLight } from "./util.js";
 /*
  
 There are three range sliders in this file.
@@ -124,25 +127,10 @@ sliders.forEach((slider) => {
 /* 
 An event listener to open the color picker.
 Any button with the class "color-picker" will open the color picker.
-The element id for the color picker is: #color-picker
 A backdrop is added to the color picker to prevent it from being clicked.
 */
 
-/* 
-This code to check hex light/dark value is sourced here:
-wc_hex_is_light: https://github.com/woocommerce/woocommerce/blob/master/includes/wc-formatting-functions.php
-*/
-
-function isLight(color) {
-  const hex = color.replace("#", "");
-  const c_r = parseInt(hex.substr(0, 2), 16);
-  const c_g = parseInt(hex.substr(2, 2), 16);
-  const c_b = parseInt(hex.substr(4, 2), 16);
-  const brightness = (c_r * 299 + c_g * 587 + c_b * 114) / 1000;
-  return brightness > 155;
-}
-
-function updateCurrentColor(newColor) {
+export function updateCurrentColor(newColor) {
   document.querySelectorAll(".current-brush-color").forEach((el) => {
     el.style.backgroundColor = newColor;
     el.style.fill = newColor;
@@ -151,20 +139,39 @@ function updateCurrentColor(newColor) {
   document.querySelectorAll(".current-brush-color-bg").forEach((el) => {
     el.style.backgroundColor = isLight(newColor) ? "#48494a" : "#fff";
   });
+
+  // Set localStorage color
+  setStorage("current-brush-color", newColor);
 }
 
-$(".color-picker:not(.open)").on("click", function () {
+function showColorPicker() {
   $(".color-picker").addClass("open");
   $("#color-picker").show();
   $("#color-picker-backdrop").show();
-});
-
-$("#color-picker-backdrop").on("click", function () {
+}
+function hideColorPicker() {
   $(".color-picker").removeClass("open");
   $("#color-picker").hide();
   $("#color-picker-backdrop").hide();
+}
+
+$(".color-picker:not(.open)").on("click", function () {
+  showColorPicker();
 });
 
+$("#color-picker-backdrop").on("click", function () {
+  hideColorPicker();
+});
+
+// Add keybindings to the color picker, when escape is pressed, the color picker will be closed
+$(document).on("keydown", function (e) {
+  // Check if .color-picker is open
+  if ($(".color-picker").hasClass("open")) {
+    if (e.key === "Escape") {
+      hideColorPicker();
+    }
+  }
+});
 /* 
 When any .btn-solid-picker is clicked, the color of the button will be set to the current color.
 */
@@ -189,8 +196,10 @@ solidPickers.forEach((el, key) => {
 });
 
 /* 
-  The inital color of the brush is set to #2c99f2, 
-  In later phase, it will be replaced by localstorage.getItem("current-brush-color")
+  Get current color from localStorage.
+  If there is no color in localStorage, set the current color to the first color in solidColors.
 */
-
-updateCurrentColor("#2c99f2"); // default blue
+$(document).ready(function () {
+  const currentColor = getStorage("current-brush-color") || solidColors[0];
+  updateCurrentColor(currentColor);
+});

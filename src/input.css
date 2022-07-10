@@ -27,9 +27,13 @@
   }
 
   .app-slider::-webkit-slider-thumb {
-    @apply h-6 w-6 rounded-full bg-white shadow-md shadow-gray-400/50 ring-1 ring-inset ring-gray-100 transition hover:scale-105 active:shadow-gray-400;
+    @apply h-6 w-6 rounded-full bg-white shadow-md shadow-gray-400/50 ring-1 ring-inset ring-gray-100 transition 
+    hover:scale-105 active:shadow-gray-400;
     -webkit-appearance: none;
     appearance: none;
+  }
+  .app-slider:focus-within::-webkit-slider-thumb {
+    @apply ring-2 ring-purple-400;
   }
   .preview-circle {
     @apply transition-colors;
@@ -51,10 +55,25 @@
     border-top: 1px solid rgba(0, 0, 0, 0.3); */
     transform: translate(-50%, -50%) rotate(45deg);
   }
+
+  .button-focus-default:focus-visible {
+    @apply focus:ring-2 focus:ring-gray-500 focus:ring-offset-2;
+  }
 }
 
 input::-webkit-outer-spin-button,
 input::-webkit-inner-spin-button {
   -webkit-appearance: none;
   margin: 0;
+}
+/* Fixes for bootstrap */
+a {
+  color: inherit !important;
+  text-decoration: inherit !important;
+}
+button:focus,
+button:active,
+input:focus {
+  outline: none;
+  -webkit-box-shadow: none;
 }
