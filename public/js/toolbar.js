@@ -48,7 +48,7 @@ The element class is .stroke-preview.
 
 let previewIntervalId; // this value is to determine whether the preview popover is shown
 
-function showPreviewPopover() {
+function showPreviewPopover(position) {
   // show #stroke-preview-popover, if the stroke preview has class opacity-100, otherwise wait 2 seconds change class opacity-100 to opacity-0
   // clear the interval if it exists
   if (previewIntervalId) {
@@ -65,6 +65,7 @@ function showPreviewPopover() {
       clearInterval(previewIntervalId);
     }, 2000);
   }
+  previewPopover.style.left = position.left + "px";
 }
 function initPreviewPopover() {
   // when the first time the slider is updated, #stroke-preview-popover will be shown by removing class invisible
@@ -76,7 +77,10 @@ function initPreviewPopover() {
   }
 }
 
-function updateStrokePreview() {
+function updateStrokePreview(id) {
+  // id is the id of the slider
+  // this is to get the current position of the slider
+  // so that the previewPopover can be shown at the right position
   const previews = document.querySelectorAll(".stroke-preview");
   const width = $("#slider-width").val();
   const height = $("#slider-height").val();
@@ -86,7 +90,9 @@ function updateStrokePreview() {
     el.style.height = height * 0.7 + "px";
     el.style.transform = `rotate(${angle}deg)`;
   });
-  showPreviewPopover();
+  // update the preview popover
+  const position = $(`#slider-${id}`).position();
+  showPreviewPopover(position);
 }
 
 function updateSlider(id, value, min, max) {
@@ -111,7 +117,7 @@ function updateSlider(id, value, min, max) {
     `linear-gradient(to right, rgb(192 132 252) ${percent}%, rgb(229 231 235) ${percent}%)`
   );
   // update the preview
-  updateStrokePreview();
+  updateStrokePreview(id);
   // store the value to local storage based on id
   setStorage(id, value);
 }
@@ -148,19 +154,30 @@ export function updateCurrentColor(newColor) {
   setStorage("current-brush-color", newColor);
 }
 
-function showColorPicker() {
+function showColorPicker(position) {
   $(".color-picker").addClass("open");
   $("#color-picker").show();
-  $("#color-picker-backdrop").show();
+  $("#color-picker-backdrop").removeClass("pointer-events-none opacity-0");
+  // apply position to the color picker
+  console.log(position);
+  $("#color-picker").css({
+    bottom: position.bottom + "px",
+    left: position.left + "px",
+  });
 }
 function hideColorPicker() {
   $(".color-picker").removeClass("open");
   $("#color-picker").hide();
-  $("#color-picker-backdrop").hide();
+  $("#color-picker-backdrop").addClass("pointer-events-none opacity-0");
 }
 
 $(".color-picker:not(.open)").on("click", function () {
-  showColorPicker();
+  // get the position of the button
+  const position = {
+    bottom: $(window).height() - $(this).offset().top + 8,
+    left: $(this).offset().left,
+  };
+  showColorPicker(position);
 });
 
 $("#color-picker-backdrop").on("click", function () {

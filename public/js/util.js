@@ -11,3 +11,13 @@ export function isLight(color) {
   const brightness = (c_r * 299 + c_g * 587 + c_b * 114) / 1000;
   return brightness > 155;
 }
+
+/* https://www.delftstack.com/howto/javascript/rgb-to-hex-javascript/ */
+function colorToHex(color) {
+  var hexadecimal = color.toString(16);
+  return hexadecimal.length == 1 ? "0" + hexadecimal : hexadecimal;
+}
+
+export function convertRGBtoHex(red, green, blue) {
+  return "#" + colorToHex(red) + colorToHex(green) + colorToHex(blue);
+}
