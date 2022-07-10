@@ -23,7 +23,7 @@
     @apply flex h-10 w-10 items-center justify-center rounded-full text-gray-700 transition hover:bg-blue-50 active:bg-blue-100 [&>span]:hover:text-blue-700 [&>span]:active:text-blue-900;
   }
   .btn-icon-secondary {
-    @apply flex h-10 w-10 items-center justify-center rounded-full bg-gray-100 text-gray-700 transition hover:bg-gray-200 active:bg-gray-300 [&>span]:hover:text-gray-700 [&>span]:active:text-gray-900;
+    @apply flex h-10 w-10 items-center justify-center rounded-full bg-gray-100 text-gray-700 transition hover:bg-gray-200 active:bg-gray-300 [&>span]:hover:text-gray-700 [&>span]:active:text-gray-900 [&.active]:bg-gray-300;
   }
 
   .app-slider::-webkit-slider-thumb {
@@ -58,13 +58,13 @@
     @apply -mb-5 h-14;
   }
   .color-removeable-wrap .btn-solid-remove {
-    @apply pointer-events-none absolute bottom-14 -left-3 z-10 mx-auto cursor-pointer rounded-lg border border-gray-900 bg-gray-800 !py-1 !px-2 text-sm text-white opacity-0 shadow-lg shadow-gray-300/30 transition delay-75 mb-1;
+    @apply pointer-events-none absolute bottom-14 -left-3 z-10 mx-auto mb-1 cursor-pointer rounded-lg border border-gray-900 bg-gray-800 !py-1 !px-2 text-sm text-white opacity-0 shadow-lg shadow-gray-300/30 transition delay-75;
   }
   .color-removeable-wrap:hover .btn-solid-remove {
     @apply pointer-events-auto opacity-100 delay-500;
   }
   .color-removeable-wrap .btn-solid-remove::after {
-    @apply absolute bg-gray-800 content-[""] w-4 h-4 rounded;
+    @apply absolute h-4 w-4 rounded bg-gray-800 content-[""];
     left: 50%;
     top: 100%;
     transform: translate(-50%, -50%) rotate(135deg);
@@ -110,4 +110,20 @@ button:active,
 input:focus {
   outline: none;
   -webkit-box-shadow: none;
+}
+
+/* https://developer.mozilla.org/en-US/docs/Web/HTML/Element/kbd */
+kbd {
+  background-color: #eee;
+  border-radius: 3px;
+  border: 1px solid #b4b4b4;
+  box-shadow: 0 1px 1px rgba(0, 0, 0, 0.2),
+    0 2px 0 0 rgba(255, 255, 255, 0.7) inset;
+  color: #333;
+  display: inline-block;
+  font-size: 0.85em;
+  font-weight: 700;
+  line-height: 1;
+  padding: 2px 4px;
+  white-space: nowrap;
 }

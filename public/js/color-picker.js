@@ -1,12 +1,44 @@
 import "https://cdn.skypack.dev/vanilla-colorful";
-import { updateCurrentColor } from "./toolbar.js";
 import { setStorage, getStorage } from "./storage.js";
+import { rgbToHex, isLight } from "./util.js";
 
 const picker = document.querySelector("hex-color-picker");
 
 export function updateMultiPickerColor(color) {
   const colorPicker = document.querySelector(".color-picker-circle");
   colorPicker.style.backgroundColor = color;
+  // Also update the hex-color-picker color attribute
+  picker.color = color;
+}
+
+/* 
+An event listener to open the color picker.
+Any button with the class "color-picker" will open the color picker.
+A backdrop is added to the color picker to prevent it from being clicked.
+*/
+
+export function updateCurrentColor(newColor) {
+  document.querySelectorAll(".current-brush-color").forEach((el) => {
+    el.style.backgroundColor = newColor;
+    el.style.fill = newColor;
+  });
+  // update .current-brush-color-bg based on isLight(newColor)
+  document.querySelectorAll(".current-brush-color-bg").forEach((el) => {
+    el.style.backgroundColor = isLight(newColor) ? "#48494a" : "#fff";
+  });
+
+  // Set all .btn-solid-picker that match newColor active
+  document.querySelectorAll(".btn-solid-picker").forEach((el) => {
+    el.classList.remove("active");
+    const elColor = rgbToHex(el.style.backgroundColor);
+    if (elColor === newColor) {
+      console.log(elColor, newColor);
+      el.classList.add("active");
+    }
+  });
+
+  // Set localStorage color
+  setStorage("current-brush-color", newColor);
 }
 
 $(window).on("load", function () {
@@ -26,20 +58,8 @@ $(window).on("load", function () {
     colorSelectButton.addEventListener(
       "click",
       function () {
-        $(".btn-solid-picker").removeClass("active");
-        // find all .btn-solid-picker where background-color is the same as color
-        $(".btn-solid-picker")
-          .filter(function () {
-            return (
-              $(this).css("background-color") ===
-              $(colorSelectButton).css("background-color")
-            );
-          })
-          .addClass("active");
-
         updateCurrentColor(color);
         updateMultiPickerColor(color);
-        setStorage("current-brush-color", color);
       } // end of click event
     );
     colorDiv.append(colorSelectButton);
@@ -82,9 +102,9 @@ $(window).on("load", function () {
   // get presetColors and parse it to an array
   const presetColors = JSON.parse(getStorage("preset-colors"));
   // if presetColors is not empty, display them
+
   if (presetColors) {
-    console.log(presetColors);
-    presetColors.forEach((color) => {
+    presetColors.reverse().forEach((color) => {
       appendColorButton(color);
     });
   }
@@ -119,6 +139,9 @@ $(window).on("load", function () {
         // if presetColors is not empty, add the current color to it
         // Add to the first index of the array
         presetColors.unshift(currentColor);
+        console.log(
+          `presetColors: ${presetColors}, currentColor: ${currentColor}`
+        );
         stringyfiedColor = JSON.stringify(presetColors);
       }
       setStorage("preset-colors", stringyfiedColor);

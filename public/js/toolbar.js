@@ -1,6 +1,6 @@
 import "./color-picker.js";
 import { setStorage, getStorage } from "./storage.js";
-import { isLight } from "./util.js";
+import { updateCurrentColor } from "./color-picker.js";
 
 /* 
 There are three range sliders in this file.
@@ -38,7 +38,7 @@ const sliders = [
   },
 ];
 
-const solidColors = ["#2c99f2", "#31db57", "#ffe43e", "#ee4b2e"];
+export const solidColors = ["#2c99f2", "#31db57", "#ffe43e", "#ee4b2e"];
 
 /* 
 A preview of the current brush stroke based on the current brush settings.
@@ -48,7 +48,7 @@ The element class is .stroke-preview.
 
 let previewIntervalId; // this value is to determine whether the preview popover is shown
 
-function showPreviewPopover(position) {
+export function showPreviewPopover(position) {
   // show #stroke-preview-popover, if the stroke preview has class opacity-100, otherwise wait 2 seconds change class opacity-100 to opacity-0
   // clear the interval if it exists
   if (previewIntervalId) {
@@ -67,7 +67,7 @@ function showPreviewPopover(position) {
   }
   previewPopover.style.left = position.left + "px";
 }
-function initPreviewPopover() {
+export function initPreviewPopover() {
   // when the first time the slider is updated, #stroke-preview-popover will be shown by removing class invisible
   const strokePreivewPopover = document.querySelector(
     "#stroke-preview-popover"
@@ -77,7 +77,7 @@ function initPreviewPopover() {
   }
 }
 
-function updateStrokePreview(id) {
+export function updateStrokePreview(id, showPopover = true) {
   // id is the id of the slider
   // this is to get the current position of the slider
   // so that the previewPopover can be shown at the right position
@@ -95,9 +95,10 @@ function updateStrokePreview(id) {
   showPreviewPopover(position);
 }
 
-function updateSlider(id, value, min, max) {
+export function updateSlider(id, value, showPopover = true) {
   const slider = $(`#slider-${id}`);
   const input = $(`#slider-input-${id}`);
+  const { min, max } = sliders.find((slider) => slider.id === id);
 
   if (value < min) {
     value = min;
@@ -122,105 +123,87 @@ function updateSlider(id, value, min, max) {
   setStorage(id, value);
 }
 
-sliders.forEach((slider) => {
-  updateSlider(slider.id, slider.value, slider.min, slider.max);
-  $(`#slider-${slider.id}`).on("input", function () {
-    initPreviewPopover();
-    updateSlider(slider.id, $(this).val(), slider.min, slider.max);
-  });
-  $(`#slider-input-${slider.id}`).on("input", function () {
-    initPreviewPopover();
-    updateSlider(slider.id, $(this).val(), slider.min, slider.max);
-  });
-});
-
-/* 
-An event listener to open the color picker.
-Any button with the class "color-picker" will open the color picker.
-A backdrop is added to the color picker to prevent it from being clicked.
-*/
-
-export function updateCurrentColor(newColor) {
-  document.querySelectorAll(".current-brush-color").forEach((el) => {
-    el.style.backgroundColor = newColor;
-    el.style.fill = newColor;
-  });
-  // update .current-brush-color-bg based on isLight(newColor)
-  document.querySelectorAll(".current-brush-color-bg").forEach((el) => {
-    el.style.backgroundColor = isLight(newColor) ? "#48494a" : "#fff";
+$(document).ready(() => {
+  sliders.forEach((slider) => {
+    updateSlider(slider.id, slider.value);
+    $(`#slider-${slider.id}`).on("input", function () {
+      initPreviewPopover();
+      updateSlider(slider.id, $(this).val());
+    });
+    $(`#slider-input-${slider.id}`).on("input", function () {
+      initPreviewPopover();
+      updateSlider(slider.id, $(this).val());
+    });
   });
 
-  // Set localStorage color
-  setStorage("current-brush-color", newColor);
-}
-
-function showColorPicker(position) {
-  $(".color-picker").addClass("open");
-  $("#color-picker").show();
-  $("#color-picker-backdrop").removeClass("pointer-events-none opacity-0");
-  // apply position to the color picker
-  console.log(position);
-  $("#color-picker").css({
-    bottom: position.bottom + "px",
-    left: position.left + "px",
-  });
-}
-function hideColorPicker() {
-  $(".color-picker").removeClass("open");
-  $("#color-picker").hide();
-  $("#color-picker-backdrop").addClass("pointer-events-none opacity-0");
-}
-
-$(".color-picker:not(.open)").on("click", function () {
-  // get the position of the button
-  const position = {
-    bottom: $(window).height() - $(this).offset().top + 8,
-    left: $(this).offset().left,
-  };
-  showColorPicker(position);
-});
-
-$("#color-picker-backdrop").on("click", function () {
-  hideColorPicker();
-});
-
-// Add keybindings to the color picker, when escape is pressed, the color picker will be closed
-$(document).on("keydown", function (e) {
-  // Check if .color-picker is open, then close it if the key is escape
-  if ($(".color-picker").hasClass("open")) {
-    if (e.key === "Escape") {
-      hideColorPicker();
-    }
+  function showColorPicker(position) {
+    $(".color-picker").addClass("open");
+    $("#color-picker").show();
+    $("#color-picker-backdrop").removeClass("pointer-events-none opacity-0");
+    // apply position to the color picker
+    console.log(position);
+    $("#color-picker").css({
+      bottom: position.bottom + "px",
+      left: position.left + "px",
+    });
   }
-});
-/* 
+  function hideColorPicker() {
+    $(".color-picker").removeClass("open");
+    $("#color-picker").hide();
+    $("#color-picker-backdrop").addClass("pointer-events-none opacity-0");
+  }
+
+  $(".color-picker:not(.open)").on("click", function () {
+    // get the position of the button
+    const position = {
+      bottom: $(window).height() - $(this).offset().top + 8,
+      left: $(this).offset().left,
+    };
+    showColorPicker(position);
+  });
+
+  $("#color-picker-backdrop").on("click", function () {
+    hideColorPicker();
+  });
+
+  // Add keybindings to the color picker, when escape is pressed, the color picker will be closed
+  $(document).on("keydown", function (e) {
+    // Check if .color-picker is open, then close it if the key is escape
+    if ($(".color-picker").hasClass("open")) {
+      if (e.key === "Escape") {
+        hideColorPicker();
+      }
+    }
+  });
+  /* 
 When any .btn-solid-picker is clicked, the color of the button will be set to the current color.
 */
 
-$(".btn-solid-picker").on("click", function (e) {
-  // remove active class from all .btn-solid-picker
-  $(".btn-solid-picker").removeClass("active");
-  const color = $(this).css("background-color");
-  // add active class to the button that was clicked
-  $(this).addClass("active");
-  updateCurrentColor(color);
-});
+  $(".btn-solid-picker").on("click", function (e) {
+    // remove active class from all .btn-solid-picker
+    $(".btn-solid-picker").removeClass("active");
+    const color = $(this).css("background-color");
+    // add active class to the button that was clicked
+    $(this).addClass("active");
+    updateCurrentColor(color);
+  });
 
-/* 
+  /* 
 For each .btn-solid-picker, apply the color from solidColors array.
 */
 
-const solidPickers = document.querySelectorAll(".btn-solid-picker");
-solidPickers.forEach((el, key) => {
-  el.style.backgroundColor = solidColors[key];
-  el.style.fill = solidColors[key];
-});
+  const solidPickers = document.querySelectorAll(".btn-solid-picker");
+  solidPickers.forEach((el, key) => {
+    el.style.backgroundColor = solidColors[key];
+    el.style.fill = solidColors[key];
+  });
 
-/* 
+  /* 
   Get current color from localStorage.
   If there is no color in localStorage, set the current color to the first color in solidColors.
 */
-$(document).ready(function () {
   const currentColor = getStorage("current-brush-color") || solidColors[0];
-  updateCurrentColor(currentColor);
+  setTimeout(() => {
+    updateCurrentColor(currentColor);
+  }, 300);
 });

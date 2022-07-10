@@ -12,12 +12,15 @@ export function isLight(color) {
   return brightness > 155;
 }
 
-/* https://www.delftstack.com/howto/javascript/rgb-to-hex-javascript/ */
-function colorToHex(color) {
-  var hexadecimal = color.toString(16);
-  return hexadecimal.length == 1 ? "0" + hexadecimal : hexadecimal;
+/* https://www.w3docs.com/snippets/javascript/how-to-convert-rgb-to-hex-and-vice-versa.html */
+function componentToHex(c) {
+  let hex = Number(c).toString(16);
+  return hex.length == 1 ? "0" + hex : hex;
 }
-
-export function convertRGBtoHex(red, green, blue) {
-  return "#" + colorToHex(red) + colorToHex(green) + colorToHex(blue);
+export function rgbToHex(rgb) {
+  const rgbArray = rgb.match(/\d+/g);
+  const { r, g, b } = { r: rgbArray[0], g: rgbArray[1], b: rgbArray[2] };
+  const output =
+    "#" + componentToHex(r) + componentToHex(g) + componentToHex(b);
+  return output;
 }

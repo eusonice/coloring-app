@@ -35,13 +35,15 @@
 
     <!-- add jQuery -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <!-- add KeyboardJS -->
+    <script src="js/keyboard.min.js"></script>
   </head>
 
   <body>
     <div class="">
       <!-- Start Menu Bar -->
       <div
-        class="fixed top-0 left-0 right-0 z-20 flex items-center justify-between bg-white py-2 px-6 shadow-xl shadow-gray-300/20"
+        class="fixed top-0 left-0 right-0 z-20 flex items-center justify-between px-6 py-2 bg-white shadow-xl shadow-gray-300/20"
       >
         <!-- Menu Start Icons -->
         <div class="flex items-center justify-center gap-2">
@@ -53,7 +55,7 @@
           </a>
           <button
             type="button"
-            id="save-butotn"
+            id="save-button"
             class="button-focus-default btn-icon-success"
           >
             <span class="material-symbols-rounded"> save </span>
@@ -74,14 +76,18 @@
               max="100"
               value="16"
               step="1"
-              class="app-slider h-2 w-full cursor-pointer appearance-none rounded-lg bg-gray-200 dark:bg-gray-700"
+              class="w-full h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer app-slider dark:bg-gray-700"
+              onfocus="keyboardJS.pause();"
+              onblur="keyboardJS.resume();"
             />
             <input
               type="number"
               value="16"
-              class="w-11 rounded border border-gray-100 p-1 text-center transition selection:bg-purple-100 focus:ring-2 focus:ring-purple-400"
+              class="p-1 text-center transition border border-gray-100 rounded w-11 selection:bg-purple-100 focus:ring-2 focus:ring-purple-400"
               id="slider-input-width"
               onClick="this.select();"
+              onfocus="keyboardJS.pause();"
+              onblur="keyboardJS.resume();"
             />
           </div>
           <div class="flex items-center justify-center gap-2">
@@ -97,14 +103,18 @@
               max="100"
               value="14"
               step="1"
-              class="app-slider h-2 w-full cursor-pointer appearance-none rounded-lg bg-gray-200 dark:bg-gray-700"
+              class="w-full h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer app-slider dark:bg-gray-700"
+              onfocus="keyboardJS.pause();"
+              onblur="keyboardJS.resume();"
             />
             <input
               type="number"
               value="14"
-              class="w-11 rounded border border-gray-100 p-1 text-center transition selection:bg-purple-100 focus:ring-2 focus:ring-purple-400"
+              class="p-1 text-center transition border border-gray-100 rounded w-11 selection:bg-purple-100 focus:ring-2 focus:ring-purple-400"
               id="slider-input-height"
               onClick="this.select();"
+              onfocus="keyboardJS.pause();"
+              onblur="keyboardJS.resume();"
             />
           </div>
           <div class="flex items-center justify-center gap-2">
@@ -120,28 +130,27 @@
               max="180"
               value="85"
               step="1"
-              class="app-slider h-2 w-full cursor-pointer appearance-none rounded-lg bg-gray-200 dark:bg-gray-700"
+              class="w-full h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer app-slider dark:bg-gray-700"
+              onfocus="keyboardJS.pause();"
+              onblur="keyboardJS.resume();"
             />
             <input
               type="number"
               value="85"
-              class="w-11 rounded border border-gray-100 p-1 text-center selection:bg-purple-100 focus:ring-2 focus:ring-purple-500"
+              class="p-1 text-center border border-gray-100 rounded w-11 selection:bg-purple-100 focus:ring-2 focus:ring-purple-500"
               4
               id="slider-input-angle"
               onClick="this.select();"
+              onfocus="keyboardJS.pause();"
+              onblur="keyboardJS.resume();"
             />
           </div>
         </div>
         <!-- Menu End Icons -->
         <div class="flex items-center justify-center gap-2">
-          <a href="/" tabindex="-1" class="pointer-events-none">
-            <div class="btn-icon-primary pointer-events-none opacity-0">
-              <span class="material-symbols-rounded"> home </span>
-            </div>
-          </a>
           <button
             type="button"
-            id="delete-butotn"
+            id="delete-button"
             data-bs-toggle="modal"
             data-bs-target="#deleteConfirm"
             class="button-focus-default btn-icon-danger"
@@ -150,11 +159,25 @@
           </button>
           <button
             type="button"
-            id="help-butotn"
+            id="help-button"
             class="button-focus-default btn-icon-info"
           >
             <span class="material-symbols-rounded"> help </span>
           </button>
+          <button
+            type="button"
+            id="settings-button"
+            class="button-focus-default btn-icon-primary"
+            data-bs-toggle="dropdown"
+            aria-expanded="false"
+          >
+            <span class="material-symbols-rounded"> settings </span>
+          </button>
+          <ul class="dropdown-menu" aria-labelledby="settings-button">
+            <li><a class="dropdown-item" href="#">Action</a></li>
+            <li><a class="dropdown-item" href="#">Another action</a></li>
+            <li><a class="dropdown-item" href="#">Something else here</a></li>
+          </ul>
         </div>
         <!-- Color Preview Popover - Only shows when slider or slider input is active  -->
         <div
@@ -177,7 +200,7 @@
       <!-- End Menu Bar -->
       <!-- Start Toolbar -->
       <div
-        class="fixed bottom-4 left-0 right-0 z-20 flex w-full items-center justify-center"
+        class="fixed left-0 right-0 z-20 flex items-center justify-center w-full bottom-4"
       >
         <div
           class="flex items-center justify-between !gap-5 !rounded-3xl bg-white !py-4 !px-6 !shadow-2xl !shadow-gray-400/30"
@@ -200,7 +223,7 @@
           <div class="!-mb-4 !h-24 overflow-hidden">
             <button
               type="button"
-              class="translate-y-0 items-end transition duration-300 ease-in-out hover:translate-y-0"
+              class="items-end transition duration-300 ease-in-out translate-y-0 hover:translate-y-0"
             >
               <div class="sr-only">Brush Tool</div>
               <svg
@@ -214,7 +237,7 @@
                   stroke-linejoin: round;
                   stroke-miterlimit: 2;
                 "
-                class="-mr-4 h-36 w-16 overflow-visible"
+                class="w-16 -mr-4 overflow-visible h-36"
               >
                 <g transform="translate(-71.306 -45.495)">
                   <use
@@ -271,7 +294,7 @@
           <div class="!-mb-4 !h-24 overflow-hidden">
             <button
               type="button"
-              class="translate-y-4 items-end transition duration-300 ease-in-out hover:translate-y-0"
+              class="items-end transition duration-300 ease-in-out translate-y-4 hover:translate-y-0"
             >
               <div class="sr-only">Eraser Tool</div>
               <svg
@@ -285,7 +308,7 @@
                   stroke-linejoin: round;
                   stroke-miterlimit: 2;
                 "
-                class="-mr-4 h-36 w-16 overflow-visible"
+                class="w-16 -mr-4 overflow-visible h-36"
               >
                 <use
                   xlink:href="#_Image1"
@@ -359,7 +382,7 @@
           </div>
           <!-- Stroke Preview -->
           <div
-            class="preview-circle current-brush-color-bg flex h-20 w-20 items-center justify-center rounded-full"
+            class="flex items-center justify-center w-20 h-20 rounded-full preview-circle current-brush-color-bg"
           >
             <div
               class="current-brush-color stroke-preview rounded-[100%] bg-lime-500"
@@ -403,21 +426,21 @@
               class="color-picker relative flex h-9 w-9 items-center justify-center rounded-full !bg-cover bg-center ring-gray-700 transition [background:url('/images/multi-color.webp')] hover:ring-2 hover:ring-gray-500 hover:ring-offset-2 [&:not(.open)]:active:scale-95"
             >
               <div
-                class="color-picker-circle h-6 w-6 rounded-full ring-2 ring-white"
+                class="w-6 h-6 rounded-full color-picker-circle ring-2 ring-white"
               ></div>
             </button>
             <div
               id="color-picker-backdrop"
-              class="pointer-events-none fixed inset-0 z-30 bg-black/30 opacity-0 transition"
+              class="fixed inset-0 z-30 transition opacity-0 pointer-events-none bg-black/30"
             ></div>
           </div>
           <button
             type="button"
             id="zoomout-button"
-            class="button-focus-default btn-icon-secondary group"
+            class="button-focus-default btn-icon-secondary group [&.active_>span]:scale-x-75"
           >
             <span
-              class="material-symbols-rounded transition group-active:scale-x-75"
+              class="transition material-symbols-rounded group-active:scale-x-75"
             >
               remove
             </span>
@@ -425,10 +448,10 @@
           <button
             type="button"
             id="zoomin-button"
-            class="button-focus-default btn-icon-secondary group"
+            class="button-focus-default btn-icon-secondary group [&.active_>span]:scale-125"
           >
             <span
-              class="material-symbols-rounded transition group-active:scale-125"
+              class="transition material-symbols-rounded group-active:scale-125"
             >
               add
             </span>
@@ -436,7 +459,7 @@
         </div>
       </div>
       <!-- End Toolbar -->
-      <canvas class="h-screen w-full cursor-none" id="my-canvas"></canvas>
+      <canvas class="w-full h-screen cursor-none" id="my-canvas"></canvas>
     </div>
     <!-- end container -->
     <!-- Color picker -->
@@ -445,10 +468,13 @@
       class="absolute bottom-10 left-0 right-0 z-40 hidden max-w-[200px] !rounded-xl bg-white !shadow-lg !shadow-gray-400/30"
     >
       <hex-color-picker color="#849275"></hex-color-picker>
-      <div id="preset-color-container" class="w-full !p-2 relative z-10 grid grid-cols-4 gap-2 place-items-center place-content-center"></div>
+      <div
+        id="preset-color-container"
+        class="relative z-10 grid w-full grid-cols-4 place-content-center place-items-center gap-2 !p-2"
+      ></div>
       <!-- A triangle pointer -->
       <div
-        class="container__arrow--bl absolute h-4 w-4 !rounded border !border-r-white !border-b-white !border-l-gray-100 !border-t-gray-100 bg-white z-[5]"
+        class="container__arrow--bl absolute z-[5] h-4 w-4 !rounded border !border-r-white !border-b-white !border-l-gray-100 !border-t-gray-100 bg-white"
       ></div>
     </div>
     <!-- Delete confirm modal -->
@@ -478,7 +504,7 @@
             <button
               type="button"
               type="button"
-              class="btn btn-secondary text-gray-500"
+              class="text-gray-500 btn btn-secondary"
               data-bs-dismiss="modal"
             >
               Cancel
@@ -498,4 +524,5 @@
   </body>
 
   <script src="js/toolbar.js" type="module"></script>
+  <script src="js/shortcuts.js" type="module"></script>
 </html>
