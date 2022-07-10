@@ -165,7 +165,7 @@ $("#color-picker-backdrop").on("click", function () {
 
 // Add keybindings to the color picker, when escape is pressed, the color picker will be closed
 $(document).on("keydown", function (e) {
-  // Check if .color-picker is open
+  // Check if .color-picker is open, then close it if the key is escape
   if ($(".color-picker").hasClass("open")) {
     if (e.key === "Escape") {
       hideColorPicker();
