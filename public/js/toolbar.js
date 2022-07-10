@@ -104,7 +104,8 @@ export function updateSlider(id, value, showPopover = true) {
     value = min;
   }
   if (value > max) {
-    value = max;
+    // if the value is greater than the max, % the value to the max
+    value = Math.max(min, value % max);
   }
 
   slider.val(value);
