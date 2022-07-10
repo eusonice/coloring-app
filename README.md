@@ -1,166 +1,19 @@
 This is Oliver's Branch
 
-<!--
-
-List of shortcuts:
-{
-    triggers: ["mod+s"],
-    name: "save",
-    description: "Save the current drawing",
-  },
-  {
-    triggers: ["mod+z"],
-    name: "undo",
-    description: "Undo the last action",
-  },
-  {
-    triggers: ["mod+shift+z"],
-    name: "redo",
-    description: "Redo the last action",
-  },
-  {
-    triggers: ["b"],
-    name: "brush",
-    description: "Switch to brush tool",
-  },
-  {
-    triggers: ["e"],
-    name: "eraser",
-    description: "Switch to eraser tool",
-  },
-  {
-    triggers: ["c"],
-    name: "Color Picker",
-    description: "Switch to color picker tool",
-  },
-  {
-    triggers: ["alt+1"],
-    name: "First solid color",
-    description: "Switch to 1st solid color",
-  },
-  {
-    triggers: ["alt+2"],
-    name: "Second solid color",
-    description: "Switch to 2nd solid color",
-  },
-  {
-    triggers: ["alt+3"],
-    name: "Third solid color",
-    description: "Switch to 3rd solid color",
-  },
-  {
-    triggers: ["alt+4"],
-    name: "Fourth solid color",
-    description: "Switch to 4th solid color",
-  },
-  {
-    triggers: ["alt+5"],
-    name: "First gradient color",
-    description: "Switch to 1st gradient color",
-  },
-  {
-    triggers: ["alt+6"],
-    name: "Second gradient color",
-    description: "Switch to 2nd gradient color",
-  },
-  {
-    triggers: ["alt+7"],
-    name: "Third gradient color",
-    description: "Switch to 3rd gradient color",
-  },
-  {
-    triggers: ["z"],
-    name: "zoom in",
-    description: "Zoom in",
-  },
-  {
-    triggers: ["x"],
-    name: "zoom out",
-    description: "Zoom out",
-  },
-  {
-    triggers: ["up", "w"],
-    name: "Increase brush height",
-    description: "Increase brush height by 5",
-  },
-  {
-    triggers: ["shift+up", "shift+w"],
-    name: "Increase brush height",
-    description: "Increase brush height by 10",
-  },
-  {
-    triggers: ["down", "s"],
-    name: "Decrease brush height",
-    description: "Decrease brush height by 5",
-  },
-  {
-    triggers: ["shift+down", "shift+s"],
-    name: "Decrease brush height",
-    description: "Decrease brush height by 10",
-  },
-  {
-    triggers: ["left", "a"],
-    name: "Decrease brush width",
-    description: "Decrease brush width by 5",
-  },
-  {
-    triggers: ["shift+left", "shift+a"],
-    name: "Decrease brush width",
-    description: "Decrease brush width by 10",
-  },
-  {
-    triggers: ["right", "d"],
-    name: "Increase brush width",
-    description: "Increase brush width by 5",
-  },
-  {
-    triggers: ["shift+right", "shift+d"],
-    name: "Increase brush width",
-    description: "Increase brush width by 10",
-  },
-  {
-    triggers: ["shift+d", "e"],
-    name: "Increase brush angle",
-    description: "Increase brush angle by 5 degrees",
-  },
-  {
-    triggers: ["shift+d"],
-    name: "Decrease brush angle",
-    description: "Decrease brush angle by 15 degrees",
-  },
-  {
-    triggers: ["shift+a", "q"],
-    name: "Decrease brush angle",
-    description: "Decrease brush angle by 5 degrees",
-  },
-  {
-    triggers: ["shift+q"],
-    name: "Decrease brush angle",
-    description: "Decrease brush angle by 15 degrees",
-  },
-  {
-    triggers: ["shift+/"],
-    name: "Help",
-    description: "Show help",
-  },
-
-
- -->
-
 ## Features
 
-    * Color picker
-        - Select a color from the color picker
-        - Add custom colors to the color picker
-    * Brush preview
-        - Preview the brush width, height, angle and color from the toolbar or when using sliders
-    * Redo/undo
-        - Undo and redo actions
-    * Keyboard shortcuts
-        - 28 keyboard shortcuts
-        - See shortcut table below
-    * Help
-        - Open the help page
+* Color picker
+    - Select a color from the color picker
+    - Add custom colors to the color picker
+* Brush preview
+    - Preview the brush width, height, angle and color from the toolbar or when using sliders
+* Redo/undo
+    - Undo and redo actions
+* Keyboard shortcuts
+    - 28 keyboard shortcuts
+    - See shortcut table below
+* Help
+    - Open the help page
 
 ## Shortcut table
 
