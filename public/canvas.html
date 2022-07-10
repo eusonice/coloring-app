@@ -5,12 +5,11 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <!-- Bootstrap -->
-    <!-- <link
+    <link
       rel="stylesheet"
-      href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css"
-      integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
-      crossorigin="anonymous"
-    /> -->
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css"
+    />
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js"></script>
     <!-- Include Tailwind Css -->
     <link href="css/output.css" rel="stylesheet" />
     <!-- Include Dark mode toggle -->
@@ -46,20 +45,18 @@
       >
         <!-- Menu Start Icons -->
         <div class="flex items-center justify-center gap-2">
-          <a href="/">
-            <div class="btn-icon-primary">
-              <span class="material-symbols-rounded"> home </span>
-            </div>
+          <a href="/" class="button-focus-default btn-icon-primary">
+            <span class="material-symbols-rounded"> home </span>
           </a>
-          <a href="/">
-            <div class="btn-icon-primary">
-              <span class="material-symbols-rounded"> photo_library </span>
-            </div>
+          <a href="/" class="button-focus-default btn-icon-primary">
+            <span class="material-symbols-rounded"> photo_library </span>
           </a>
-          <button id="save-butotn">
-            <div class="btn-icon-success">
-              <span class="material-symbols-rounded"> save </span>
-            </div>
+          <button
+            type="button"
+            id="save-butotn"
+            class="button-focus-default btn-icon-success"
+          >
+            <span class="material-symbols-rounded"> save </span>
           </button>
         </div>
         <!-- Sliders -->
@@ -82,8 +79,9 @@
             <input
               type="number"
               value="16"
-              class="w-11 rounded border border-gray-100 p-1 text-center"
+              class="w-11 rounded border border-gray-100 p-1 text-center transition selection:bg-purple-100 focus:ring-2 focus:ring-purple-400"
               id="slider-input-width"
+              onClick="this.select();"
             />
           </div>
           <div class="flex items-center justify-center gap-2">
@@ -104,8 +102,9 @@
             <input
               type="number"
               value="14"
-              class="w-11 rounded border border-gray-100 p-1 text-center"
+              class="w-11 rounded border border-gray-100 p-1 text-center transition selection:bg-purple-100 focus:ring-2 focus:ring-purple-400"
               id="slider-input-height"
+              onClick="this.select();"
             />
           </div>
           <div class="flex items-center justify-center gap-2">
@@ -126,40 +125,48 @@
             <input
               type="number"
               value="85"
-              class="w-11 rounded border border-gray-100 p-1 text-center"
-              id="slider-input-angle"
+              class="w-11 rounded border border-gray-100 p-1 text-center selection:bg-purple-100 focus:ring-2 focus:ring-purple-500"
+              4
+              id="slider-input-angle transition"
+              onClick="this.select();"
             />
           </div>
         </div>
         <!-- Menu End Icons -->
         <div class="flex items-center justify-center gap-2">
-          <a href="/">
+          <a href="/" tabindex="-1" class="pointer-events-none">
             <div class="btn-icon-primary pointer-events-none opacity-0">
               <span class="material-symbols-rounded"> home </span>
             </div>
           </a>
-          <button id="delete-butotn">
-            <div class="btn-icon-danger">
-              <span class="material-symbols-rounded"> delete </span>
-            </div>
+          <button
+            type="button"
+            id="delete-butotn"
+            data-bs-toggle="modal"
+            data-bs-target="#deleteConfirm"
+            class="button-focus-default btn-icon-danger"
+          >
+            <span class="material-symbols-rounded"> delete </span>
           </button>
-          <button id="help-butotn">
-            <div class="btn-icon-info">
-              <span class="material-symbols-rounded"> help </span>
-            </div>
+          <button
+            type="button"
+            id="help-butotn"
+            class="button-focus-default btn-icon-info"
+          >
+            <span class="material-symbols-rounded"> help </span>
           </button>
         </div>
         <!-- Color Preview Popover - Only shows when slider or slider input is active  -->
         <div
           id="stroke-preview-popover"
-          class="pointer-events-none invisible absolute top-16 left-0 right-0 z-[25] mx-auto flex w-28 justify-center rounded-xl border border-gray-100 bg-white p-4 opacity-0 shadow-xl shadow-gray-300/20 transition-opacity"
+          class="pointer-events-none invisible absolute top-16 left-0 right-0 z-[25] mx-auto flex !w-28 justify-center rounded-xl border !border-gray-100 bg-white !p-4 opacity-0 shadow-xl shadow-gray-300/20 transition-opacity"
         >
           <!-- A triangle pointer in the middle -->
           <div
-            class="container__arrow--tc absolute h-4 w-4 rounded border border-r-0 border-b-0 border-l-gray-100 border-t-gray-100 bg-white"
+            class="container__arrow--tc absolute h-4 w-4 rounded border !border-r-0 !border-b-0 !border-l-gray-100 !border-t-gray-100 bg-white"
           ></div>
           <div
-            class="preview-circle current-brush-color-bg flex h-20 w-20 items-center justify-center rounded-full"
+            class="preview-circle current-brush-color-bg flex !h-20 !w-20 items-center justify-center rounded-full"
           >
             <div
               class="current-brush-color stroke-preview rounded-[100%] bg-lime-500"
@@ -173,18 +180,29 @@
         class="fixed bottom-4 left-0 right-0 z-20 flex w-full items-center justify-center"
       >
         <div
-          class="flex min-h-[4rem] items-center justify-between gap-5 rounded-3xl bg-white py-4 px-6 shadow-2xl shadow-gray-400/75"
+          class="flex items-center justify-between !gap-5 !rounded-3xl bg-white !py-4 !px-6 !shadow-2xl !shadow-gray-400/75"
         >
-          <button id="redo-button" class="btn-icon-secondary active:-rotate-45">
+          <button
+            type="button"
+            id="redo-button"
+            class="button-focus-default btn-icon-secondary active:-rotate-45"
+          >
             <span class="material-symbols-rounded"> undo </span>
           </button>
-          <button id="redo-button" class="btn-icon-secondary active:rotate-45">
+          <button
+            type="button"
+            id="redo-button"
+            class="button-focus-default btn-icon-secondary active:rotate-45"
+          >
             <span class="material-symbols-rounded"> redo </span>
           </button>
-          <div class="-mb-4 h-24 overflow-hidden">
+          <!-- Brush -->
+          <div class="!-mb-4 !h-24 overflow-hidden">
             <button
+              type="button"
               class="translate-y-0 items-end transition duration-300 ease-in-out hover:translate-y-0"
             >
+              <div class="sr-only">Brush Tool</div>
               <svg
                 viewBox="0 0 281 678"
                 xmlns="http://www.w3.org/2000/svg"
@@ -249,10 +267,13 @@
               </svg>
             </button>
           </div>
-          <div class="-mb-4 h-24 overflow-hidden">
+          <!-- Eraser -->
+          <div class="!-mb-4 !h-24 overflow-hidden">
             <button
+              type="button"
               class="translate-y-4 items-end transition duration-300 ease-in-out hover:translate-y-0"
             >
+              <div class="sr-only">Eraser Tool</div>
               <svg
                 viewBox="0 0 281 678"
                 xmlns="http://www.w3.org/2000/svg"
@@ -349,31 +370,63 @@
             class="grid grid-cols-4 grid-rows-2 place-content-center place-items-center gap-1.5"
           >
             <button
-              class="btn-solid-picker h-9 w-9 rounded-full ring-gray-700 ring-offset-1 ring-offset-white transition hover:ring-2 active:scale-95 [&.active]:ring-2 [&.active]:ring-inset [&.active]:ring-offset-1 [&.active]:ring-offset-gray-500"
-            ></button>
-            <button
-              class="btn-solid-picker h-9 w-9 rounded-full ring-gray-700 ring-offset-1 ring-offset-white transition hover:ring-2 active:scale-95 [&.active]:ring-2 [&.active]:ring-inset [&.active]:ring-offset-1 [&.active]:ring-offset-gray-500"
-            ></button>
-            <button
-              class="btn-solid-picker h-9 w-9 rounded-full ring-gray-700 ring-offset-1 ring-offset-white transition hover:ring-2 active:scale-95 [&.active]:ring-2 [&.active]:ring-inset [&.active]:ring-offset-1 [&.active]:ring-offset-gray-500"
-            ></button>
-            <button
-              class="btn-solid-picker h-9 w-9 rounded-full ring-gray-700 ring-offset-1 ring-offset-white transition hover:ring-2 active:scale-95 [&.active]:ring-2 [&.active]:ring-inset [&.active]:ring-offset-1 [&.active]:ring-offset-gray-500"
-            ></button>
-            <button
-              class="h-9 w-9 rounded-full bg-gradient-to-r from-sky-400 to-indigo-500 ring-gray-700 ring-offset-1 ring-offset-white transition hover:ring-2 active:scale-95 [&.active]:ring-2 [&.active]:ring-inset [&.active]:ring-offset-1 [&.active]:ring-offset-gray-500"
-            ></button>
-            <button
-              class="h-9 w-9 rounded-full bg-gradient-to-r from-indigo-400 to-rose-500 ring-gray-700 ring-offset-1 ring-offset-white transition hover:ring-2 active:scale-95 [&.active]:ring-2 [&.active]:ring-inset [&.active]:ring-offset-1 [&.active]:ring-offset-gray-500"
-            ></button>
-            <button
-              class="h-9 w-9 rounded-full bg-gradient-to-r from-sky-400 to-yellow-500 ring-gray-700 ring-offset-1 ring-offset-white transition hover:ring-2 active:scale-95 [&.active]:ring-2 [&.active]:ring-inset [&.active]:ring-offset-1 [&.active]:ring-offset-gray-500"
-            ></button>
-            <button
-              class="color-picker relative flex h-9 w-9 items-center justify-center rounded-full !bg-cover bg-center ring-gray-700 ring-offset-1 ring-offset-white transition [background:url('/images/multi-color.webp')] hover:ring-2 [&:not(.open)]:active:scale-95"
+              type="button"
+              class="btn-solid-picker flex h-9 w-9 items-center justify-center rounded-full ring-gray-700 transition hover:ring-2 hover:ring-gray-500 hover:ring-offset-2 active:scale-95 [&.active_>div]:opacity-100 [&_>div]:opacity-0"
             >
               <div
-                class="color-picker-circle h-6 w-6 rounded-full bg-transparent ring-2 ring-white"
+                class="h-6 w-6 rounded-full ring-2 ring-white transition-opacity"
+              ></div>
+            </button>
+            <button
+              type="button"
+              class="btn-solid-picker flex h-9 w-9 items-center justify-center rounded-full ring-gray-700 transition hover:ring-2 hover:ring-gray-500 hover:ring-offset-2 active:scale-95 [&.active_>div]:opacity-100 [&_>div]:opacity-0"
+            >
+              <div
+                class="h-6 w-6 rounded-full ring-2 ring-white transition-opacity"
+              ></div>
+            </button>
+            <button
+              type="button"
+              class="btn-solid-picker flex h-9 w-9 items-center justify-center rounded-full ring-gray-700 transition hover:ring-2 hover:ring-gray-500 hover:ring-offset-2 active:scale-95 [&.active_>div]:opacity-100 [&_>div]:opacity-0"
+            >
+              <div
+                class="h-6 w-6 rounded-full ring-2 ring-white transition-opacity"
+              ></div>
+            </button>
+            <button
+              type="button"
+              class="btn-solid-picker flex h-9 w-9 items-center justify-center rounded-full ring-gray-700 transition hover:ring-2 hover:ring-gray-500 hover:ring-offset-2 active:scale-95 [&.active_>div]:opacity-100 [&_>div]:opacity-0"
+            >
+              <div
+                class="h-6 w-6 rounded-full ring-2 ring-white transition-opacity"
+              ></div>
+            </button>
+            <button
+              type="button"
+              class="flex h-9 w-9 items-center justify-center rounded-full bg-gradient-to-r from-sky-400 to-indigo-500 ring-gray-700 transition hover:ring-2 hover:ring-gray-500 hover:ring-offset-2 active:scale-95 [&.active_>div]:opacity-100 [&_>div]:opacity-0"
+            >
+              <div
+                class="h-6 w-6 rounded-full ring-2 ring-white transition-opacity"
+              ></div>
+            </button>
+            <button
+              type="button"
+              class="flex h-9 w-9 items-center justify-center rounded-full bg-gradient-to-r from-indigo-400 to-rose-500 ring-gray-700 transition hover:ring-2 hover:ring-gray-500 hover:ring-offset-2 active:scale-95 [&.active_>div]:opacity-100 [&_>div]:opacity-0"
+            >
+              <div
+                class="h-6 w-6 rounded-full ring-2 ring-white transition-opacity"
+              ></div>
+            </button>
+            <button
+              type="button"
+              class="flex h-9 w-9 items-center justify-center rounded-full bg-gradient-to-r from-sky-400 to-yellow-500 ring-gray-700 transition hover:ring-2 hover:ring-gray-500 hover:ring-offset-2 active:scale-95 [&.active_>div]:opacity-100 [&_>div]:opacity-0"
+            ></button>
+            <button
+              type="button"
+              class="color-picker relative flex h-9 w-9 items-center justify-center rounded-full !bg-cover bg-center ring-gray-700 transition [background:url('/images/multi-color.webp')] hover:ring-2 hover:ring-gray-500 hover:ring-offset-2 [&:not(.open)]:active:scale-95"
+            >
+              <div
+                class="color-picker-circle h-6 w-6 rounded-full ring-2 ring-white"
               ></div>
               <hex-color-picker
                 color="#849275"
@@ -386,14 +439,22 @@
               class="fixed inset-0 z-30 hidden bg-black opacity-30"
             ></div>
           </div>
-          <button id="zoomout-button" class="btn-icon-secondary group">
+          <button
+            type="button"
+            id="zoomout-button"
+            class="button-focus-default btn-icon-secondary group"
+          >
             <span
               class="material-symbols-rounded transition group-active:scale-x-75"
             >
               remove
             </span>
           </button>
-          <button id="zoomin-button" class="btn-icon-secondary group">
+          <button
+            type="button"
+            id="zoomin-button"
+            class="button-focus-default btn-icon-secondary group"
+          >
             <span
               class="material-symbols-rounded transition group-active:scale-125"
             >
@@ -406,8 +467,51 @@
       <canvas class="h-screen w-full cursor-none" id="my-canvas"></canvas>
     </div>
     <!-- end container -->
+    <!-- Delete confirm modal -->
+    <div
+      class="modal fade"
+      id="deleteConfirm"
+      tabindex="-1"
+      aria-labelledby="deleteConfirmLabel"
+      aria-hidden="true"
+    >
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="deleteConfirmLabel">Clear Canvas</h5>
+            <button
+              type="button"
+              type="button"
+              class="btn-close"
+              data-bs-dismiss="modal"
+              aria-label="Close"
+            ></button>
+          </div>
+          <div class="modal-body">
+            <p>Are you sure you want to clear the canvas?</p>
+          </div>
+          <div class="modal-footer">
+            <button
+              type="button"
+              type="button"
+              class="btn btn-secondary text-gray-500"
+              data-bs-dismiss="modal"
+            >
+              Cancel
+            </button>
+            <button
+              type="button"
+              type="button"
+              class="btn btn-danger text-rose-500"
+              id="clear-canvas-button"
+            >
+              Confirm
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
   </body>
 
-  <script type="text/javascript" src="js/toolbar.js"></script>
-  <script src="js/color-picker.js" type="module"></script>
+  <script src="js/toolbar.js" type="module"></script>
 </html>
