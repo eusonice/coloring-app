@@ -159,11 +159,11 @@
         <!-- Color Preview Popover - Only shows when slider or slider input is active  -->
         <div
           id="stroke-preview-popover"
-          class="pointer-events-none invisible absolute top-16 left-0 right-0 z-[25] mx-auto flex !w-28 justify-center rounded-xl border !border-gray-100 bg-white !p-4 opacity-0 shadow-xl shadow-gray-300/20 transition-opacity"
+          class="pointer-events-none invisible absolute top-16 left-0 z-[25] flex !w-28 justify-center rounded-xl border !border-gray-100 bg-white !p-4 opacity-0 shadow-xl shadow-gray-300/20 transition-opacity"
         >
           <!-- A triangle pointer in the middle -->
           <div
-            class="container__arrow--tc absolute h-4 w-4 rounded border !border-r-0 !border-b-0 !border-l-gray-100 !border-t-gray-100 bg-white"
+            class="container__arrow--tc absolute h-4 w-4 !rounded border !border-r-white !border-b-white !border-l-gray-100 !border-t-gray-100 bg-white"
           ></div>
           <div
             class="preview-circle current-brush-color-bg flex !h-20 !w-20 items-center justify-center rounded-full"
@@ -180,7 +180,7 @@
         class="fixed bottom-4 left-0 right-0 z-20 flex w-full items-center justify-center"
       >
         <div
-          class="flex items-center justify-between !gap-5 !rounded-3xl bg-white !py-4 !px-6 !shadow-2xl !shadow-gray-400/75"
+          class="flex items-center justify-between !gap-5 !rounded-3xl bg-white !py-4 !px-6 !shadow-2xl !shadow-gray-400/30"
         >
           <button
             type="button"
@@ -370,57 +370,33 @@
           <div
             class="grid grid-cols-4 grid-rows-2 place-content-center place-items-center gap-1.5"
           >
-            <button
-              type="button"
-              class="btn-solid-picker flex h-9 w-9 items-center justify-center rounded-full ring-gray-700 transition hover:ring-2 hover:ring-gray-500 hover:ring-offset-2 active:scale-95 [&.active_>div]:opacity-100 [&_>div]:opacity-0"
-            >
-              <div
-                class="h-6 w-6 rounded-full ring-2 ring-white transition-opacity"
-              ></div>
+            <button type="button" class="btn-solid-picker">
+              <span class="btn-solid-picker-ring"></span>
+            </button>
+            <button type="button" class="btn-solid-picker">
+              <span class="btn-solid-picker-ring"></span>
+            </button>
+            <button type="button" class="btn-solid-picker">
+              <span class="btn-solid-picker-ring"></span>
+            </button>
+            <button type="button" class="btn-solid-picker">
+              <span class="btn-solid-picker-ring"></span>
             </button>
             <button
               type="button"
-              class="btn-solid-picker flex h-9 w-9 items-center justify-center rounded-full ring-gray-700 transition hover:ring-2 hover:ring-gray-500 hover:ring-offset-2 active:scale-95 [&.active_>div]:opacity-100 [&_>div]:opacity-0"
+              class="flex h-9 w-9 items-center justify-center rounded-full bg-gradient-to-r from-sky-400 to-indigo-500 ring-gray-700 transition hover:ring-2 hover:ring-gray-500 hover:ring-offset-2 active:scale-95 [&.active_>span]:opacity-100 [&_>span]:opacity-0"
             >
-              <div
-                class="h-6 w-6 rounded-full ring-2 ring-white transition-opacity"
-              ></div>
+              <span class="btn-solid-picker-ring"></span>
             </button>
             <button
               type="button"
-              class="btn-solid-picker flex h-9 w-9 items-center justify-center rounded-full ring-gray-700 transition hover:ring-2 hover:ring-gray-500 hover:ring-offset-2 active:scale-95 [&.active_>div]:opacity-100 [&_>div]:opacity-0"
+              class="flex h-9 w-9 items-center justify-center rounded-full bg-gradient-to-r from-indigo-400 to-rose-500 ring-gray-700 transition hover:ring-2 hover:ring-gray-500 hover:ring-offset-2 active:scale-95 [&.active_>span]:opacity-100 [&_>span]:opacity-0"
             >
-              <div
-                class="h-6 w-6 rounded-full ring-2 ring-white transition-opacity"
-              ></div>
+              <span class="btn-solid-picker-ring"></span>
             </button>
             <button
               type="button"
-              class="btn-solid-picker flex h-9 w-9 items-center justify-center rounded-full ring-gray-700 transition hover:ring-2 hover:ring-gray-500 hover:ring-offset-2 active:scale-95 [&.active_>div]:opacity-100 [&_>div]:opacity-0"
-            >
-              <div
-                class="h-6 w-6 rounded-full ring-2 ring-white transition-opacity"
-              ></div>
-            </button>
-            <button
-              type="button"
-              class="flex h-9 w-9 items-center justify-center rounded-full bg-gradient-to-r from-sky-400 to-indigo-500 ring-gray-700 transition hover:ring-2 hover:ring-gray-500 hover:ring-offset-2 active:scale-95 [&.active_>div]:opacity-100 [&_>div]:opacity-0"
-            >
-              <div
-                class="h-6 w-6 rounded-full ring-2 ring-white transition-opacity"
-              ></div>
-            </button>
-            <button
-              type="button"
-              class="flex h-9 w-9 items-center justify-center rounded-full bg-gradient-to-r from-indigo-400 to-rose-500 ring-gray-700 transition hover:ring-2 hover:ring-gray-500 hover:ring-offset-2 active:scale-95 [&.active_>div]:opacity-100 [&_>div]:opacity-0"
-            >
-              <div
-                class="h-6 w-6 rounded-full ring-2 ring-white transition-opacity"
-              ></div>
-            </button>
-            <button
-              type="button"
-              class="flex h-9 w-9 items-center justify-center rounded-full bg-gradient-to-r from-sky-400 to-yellow-500 ring-gray-700 transition hover:ring-2 hover:ring-gray-500 hover:ring-offset-2 active:scale-95 [&.active_>div]:opacity-100 [&_>div]:opacity-0"
+              class="flex h-9 w-9 items-center justify-center rounded-full bg-gradient-to-r from-sky-400 to-yellow-500 ring-gray-700 transition hover:ring-2 hover:ring-gray-500 hover:ring-offset-2 active:scale-95 [&.active_>span]:opacity-100 [&_>span]:opacity-0"
             ></button>
             <button
               type="button"
@@ -429,15 +405,10 @@
               <div
                 class="color-picker-circle h-6 w-6 rounded-full ring-2 ring-white"
               ></div>
-              <hex-color-picker
-                color="#849275"
-                id="color-picker"
-                class="absolute bottom-10 left-0 right-0 z-40 hidden"
-              ></hex-color-picker>
             </button>
             <div
               id="color-picker-backdrop"
-              class="fixed inset-0 z-30 hidden bg-black opacity-30"
+              class="pointer-events-none fixed inset-0 z-30 bg-black/30 opacity-0 transition"
             ></div>
           </div>
           <button
@@ -468,6 +439,18 @@
       <canvas class="h-screen w-full cursor-none" id="my-canvas"></canvas>
     </div>
     <!-- end container -->
+    <!-- Color picker -->
+    <div
+      id="color-picker"
+      class="absolute bottom-10 left-0 right-0 z-40 hidden max-w-[200px] !rounded-xl bg-white !shadow-lg !shadow-gray-400/30"
+    >
+      <hex-color-picker color="#849275"></hex-color-picker>
+      <div id="preset-color-container" class="w-full !p-2 relative z-10 grid grid-cols-4 gap-2 place-items-center place-content-center"></div>
+      <!-- A triangle pointer -->
+      <div
+        class="container__arrow--bl absolute h-4 w-4 !rounded border !border-r-white !border-b-white !border-l-gray-100 !border-t-gray-100 bg-white z-[5]"
+      ></div>
+    </div>
     <!-- Delete confirm modal -->
     <div
       class="modal fade"
