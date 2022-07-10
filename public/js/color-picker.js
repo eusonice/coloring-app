@@ -1,4 +1,5 @@
 import "https://cdn.skypack.dev/vanilla-colorful";
+import { bindColorButtons } from "./shortcuts.js";
 import { setStorage, getStorage } from "./storage.js";
 import { rgbToHex, isLight } from "./util.js";
 
@@ -32,7 +33,6 @@ export function updateCurrentColor(newColor) {
     el.classList.remove("active");
     const elColor = rgbToHex(el.style.backgroundColor);
     if (elColor === newColor) {
-      console.log(elColor, newColor);
       el.classList.add("active");
     }
   });
@@ -78,8 +78,10 @@ $(window).on("load", function () {
         const index = presetColors.indexOf(color);
         presetColors.splice(index, 1);
         setStorage("preset-colors", JSON.stringify(presetColors));
+        bindColorButtons();
       } // end of click event
     );
+    bindColorButtons();
   }
 
   picker.addEventListener("color-changed", (event) => {
@@ -100,11 +102,11 @@ $(window).on("load", function () {
 
   const presetColorContainer = $("#preset-color-container");
   // get presetColors and parse it to an array
-  const presetColors = JSON.parse(getStorage("preset-colors"));
+  const customColors = JSON.parse(getStorage("preset-colors"));
   // if presetColors is not empty, display them
 
-  if (presetColors) {
-    presetColors.reverse().forEach((color) => {
+  if (customColors) {
+    customColors.reverse().forEach((color) => {
       appendColorButton(color);
     });
   }

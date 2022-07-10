@@ -1,5 +1,6 @@
 import { solidColors, updateSlider } from "./toolbar.js";
 import { updateCurrentColor } from "./color-picker.js";
+import { getStorage } from "./storage.js";
 /* 
     This is a file that contains all the shortcuts for the application.
 
@@ -190,6 +191,23 @@ function toggleButton(button) {
     button.removeClass("active");
   }, 250);
 }
+// bind color buttons with current storage
+export function bindColorButtons() {
+  const customColors = JSON.parse(getStorage("preset-colors"));
+  if (customColors.length > 0) {
+    keyboardJS.withContext("picker", () => {
+      for (let i = 1; i <= Math.min(customColors.length, 10); i++) {
+        const k = i === 10 ? "0" : i;
+        keyboardJS.unbind(`alt + ${k}`, (e) => null);
+        keyboardJS.bind(`alt + ${k}`, (e) =>
+          updateCurrentColor(customColors[i - 1])
+        );
+      }
+    });
+  }
+}
+
+keyboardJS.setContext("canvas"); // Set the context to the canvas
 
 keyboardJS.bind("mod + s", (e) => {
   e.preventDefault(); // prevent browser from opening a save dialog
@@ -209,13 +227,20 @@ keyboardJS.bind("mod + s", (e) => {
 // Hint: menapulate a click event on the color picker
 
 // SHORTCUT --- 1st ~ 4th solid color --- alt + 1 ~ 4
-for (let i = 1; i <= 4; i++) {
-  keyboardJS.bind(`alt + ${i}`, (e) => {
-    e.preventDefault();
-    console.log(`set solid color to ${solidColors[i - 1]}`);
-    updateCurrentColor(solidColors[i - 1]);
-  });
-}
+/* 
+  When in drawing mode, the key bindings are bound to the toolbar colors;
+  When in color picker mode, the key bindings are bound to the custom colors, with max of 10 colors.
+*/
+keyboardJS.withContext("canvas", () => {
+  for (let i = 1; i <= 4; i++) {
+    keyboardJS.bind(`alt + ${i}`, (e) => {
+      e.preventDefault();
+      console.log(`set solid color to ${solidColors[i - 1]}`);
+      updateCurrentColor(solidColors[i - 1]);
+    });
+  }
+});
+bindColorButtons();
 
 // SHORTCUT --- 1st gradient color --- alt + 5
 

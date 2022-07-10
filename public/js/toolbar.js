@@ -147,11 +147,13 @@ $(document).ready(() => {
       bottom: position.bottom + "px",
       left: position.left + "px",
     });
+    keyboardJS.setContext("picker");
   }
   function hideColorPicker() {
     $(".color-picker").removeClass("open");
     $("#color-picker").hide();
     $("#color-picker-backdrop").addClass("pointer-events-none opacity-0");
+    keyboardJS.setContext("canvas");
   }
 
   $(".color-picker:not(.open)").on("click", function () {
