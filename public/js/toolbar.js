@@ -92,7 +92,9 @@ export function updateStrokePreview(id, showPopover = true) {
   });
   // update the preview popover
   const position = $(`#slider-${id}`).position();
-  showPreviewPopover(position);
+  if (showPopover) {
+    showPreviewPopover(position);
+  }
 }
 
 export function updateSlider(id, value, showPopover = true) {

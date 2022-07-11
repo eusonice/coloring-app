@@ -43,7 +43,7 @@
     <div class="">
       <!-- Start Menu Bar -->
       <div
-        class="fixed top-0 left-0 right-0 z-20 flex items-center justify-between px-6 py-2 bg-white shadow-xl shadow-gray-300/20"
+        class="fixed top-0 left-0 right-0 z-20 flex items-center justify-between bg-white px-6 py-2 shadow-xl shadow-gray-300/20"
       >
         <!-- Menu Start Icons -->
         <div class="flex items-center justify-center gap-2">
@@ -76,14 +76,14 @@
               max="100"
               value="16"
               step="1"
-              class="w-full h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer app-slider dark:bg-gray-700"
+              class="app-slider h-2 w-full cursor-pointer appearance-none rounded-lg bg-gray-200 dark:bg-gray-700"
               onfocus="keyboardJS.pause();"
               onblur="keyboardJS.resume();"
             />
             <input
               type="number"
               value="16"
-              class="p-1 text-center transition border border-gray-100 rounded w-11 selection:bg-purple-100 focus:ring-2 focus:ring-purple-400"
+              class="w-11 rounded border border-gray-100 p-1 text-center transition selection:bg-purple-100 focus:ring-2 focus:ring-purple-400"
               id="slider-input-width"
               onClick="this.select();"
               onfocus="keyboardJS.pause();"
@@ -103,14 +103,14 @@
               max="100"
               value="14"
               step="1"
-              class="w-full h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer app-slider dark:bg-gray-700"
+              class="app-slider h-2 w-full cursor-pointer appearance-none rounded-lg bg-gray-200 dark:bg-gray-700"
               onfocus="keyboardJS.pause();"
               onblur="keyboardJS.resume();"
             />
             <input
               type="number"
               value="14"
-              class="p-1 text-center transition border border-gray-100 rounded w-11 selection:bg-purple-100 focus:ring-2 focus:ring-purple-400"
+              class="w-11 rounded border border-gray-100 p-1 text-center transition selection:bg-purple-100 focus:ring-2 focus:ring-purple-400"
               id="slider-input-height"
               onClick="this.select();"
               onfocus="keyboardJS.pause();"
@@ -130,14 +130,14 @@
               max="180"
               value="85"
               step="1"
-              class="w-full h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer app-slider dark:bg-gray-700"
+              class="app-slider h-2 w-full cursor-pointer appearance-none rounded-lg bg-gray-200 dark:bg-gray-700"
               onfocus="keyboardJS.pause();"
               onblur="keyboardJS.resume();"
             />
             <input
               type="number"
               value="85"
-              class="p-1 text-center border border-gray-100 rounded w-11 selection:bg-purple-100 focus:ring-2 focus:ring-purple-500"
+              class="w-11 rounded border border-gray-100 p-1 text-center selection:bg-purple-100 focus:ring-2 focus:ring-purple-500"
               4
               id="slider-input-angle"
               onClick="this.select();"
@@ -160,6 +160,8 @@
           <button
             type="button"
             id="help-button"
+            data-bs-toggle="modal"
+            data-bs-target="#help"
             class="button-focus-default btn-icon-info"
           >
             <span class="material-symbols-rounded"> help </span>
@@ -173,10 +175,18 @@
           >
             <span class="material-symbols-rounded"> settings </span>
           </button>
-          <ul class="dropdown-menu" aria-labelledby="settings-button">
-            <li><a class="dropdown-item" href="#">Action</a></li>
-            <li><a class="dropdown-item" href="#">Another action</a></li>
-            <li><a class="dropdown-item" href="#">Something else here</a></li>
+          <ul
+            class="dropdown-menu !border-gray-100 !shadow-xl !shadow-gray-400/20"
+            aria-labelledby="settings-button"
+          >
+            <li>
+              <button
+                class="dropdown-item flex items-center justify-start gap-2"
+              >
+                <span class="material-symbols-rounded"> download </span>
+                <p>Download</p>
+              </button>
+            </li>
           </ul>
         </div>
         <!-- Color Preview Popover - Only shows when slider or slider input is active  -->
@@ -200,7 +210,7 @@
       <!-- End Menu Bar -->
       <!-- Start Toolbar -->
       <div
-        class="fixed left-0 right-0 z-20 flex items-center justify-center w-full bottom-4"
+        class="fixed left-0 right-0 bottom-4 z-20 flex w-full items-center justify-center"
       >
         <div
           class="flex items-center justify-between !gap-5 !rounded-3xl bg-white !py-4 !px-6 !shadow-2xl !shadow-gray-400/30"
@@ -220,10 +230,10 @@
             <span class="material-symbols-rounded"> redo </span>
           </button>
           <!-- Brush -->
-          <div class="!-mb-4 !h-24 overflow-hidden">
+          <div class="relative !-bottom-4 !h-24 overflow-hidden">
             <button
               type="button"
-              class="items-end transition duration-300 ease-in-out translate-y-0 hover:translate-y-0"
+              class="group relative items-end transition duration-300 ease-in-out"
             >
               <div class="sr-only">Brush Tool</div>
               <svg
@@ -237,7 +247,7 @@
                   stroke-linejoin: round;
                   stroke-miterlimit: 2;
                 "
-                class="w-16 -mr-4 overflow-visible h-36"
+                class="-mr-4 h-36 w-16 translate-y-4 overflow-visible transition duration-300 ease-in-out group-hover:translate-y-0 group-focus-visible:translate-y-0"
               >
                 <g transform="translate(-71.306 -45.495)">
                   <use
@@ -291,10 +301,10 @@
             </button>
           </div>
           <!-- Eraser -->
-          <div class="!-mb-4 !h-24 overflow-hidden">
+          <div class="relative !-bottom-4 !h-24 overflow-hidden">
             <button
               type="button"
-              class="items-end transition duration-300 ease-in-out translate-y-4 hover:translate-y-0"
+              class="group relative items-end transition duration-300 ease-in-out"
             >
               <div class="sr-only">Eraser Tool</div>
               <svg
@@ -308,7 +318,7 @@
                   stroke-linejoin: round;
                   stroke-miterlimit: 2;
                 "
-                class="w-16 -mr-4 overflow-visible h-36"
+                class="-mr-4 h-36 w-16 translate-y-4 overflow-visible transition duration-300 ease-in-out group-hover:translate-y-0 group-focus-visible:translate-y-0"
               >
                 <use
                   xlink:href="#_Image1"
@@ -382,7 +392,7 @@
           </div>
           <!-- Stroke Preview -->
           <div
-            class="flex items-center justify-center w-20 h-20 rounded-full preview-circle current-brush-color-bg"
+            class="preview-circle current-brush-color-bg flex h-20 w-20 items-center justify-center rounded-full"
           >
             <div
               class="current-brush-color stroke-preview rounded-[100%] bg-lime-500"
@@ -426,12 +436,12 @@
               class="color-picker relative flex h-9 w-9 items-center justify-center rounded-full !bg-cover bg-center ring-gray-700 transition [background:url('/images/multi-color.webp')] hover:ring-2 hover:ring-gray-500 hover:ring-offset-2 [&:not(.open)]:active:scale-95"
             >
               <div
-                class="w-6 h-6 rounded-full color-picker-circle ring-2 ring-white transition-colors"
+                class="color-picker-circle h-6 w-6 rounded-full ring-2 ring-white transition-colors"
               ></div>
             </button>
             <div
               id="color-picker-backdrop"
-              class="fixed inset-0 z-30 transition opacity-0 pointer-events-none bg-black/30"
+              class="pointer-events-none fixed inset-0 z-30 bg-black/30 opacity-0 transition"
             ></div>
           </div>
           <button
@@ -440,7 +450,7 @@
             class="button-focus-default btn-icon-secondary group [&.active_>span]:scale-x-75"
           >
             <span
-              class="transition material-symbols-rounded group-active:scale-x-75"
+              class="material-symbols-rounded transition group-active:scale-x-75"
             >
               remove
             </span>
@@ -451,7 +461,7 @@
             class="button-focus-default btn-icon-secondary group [&.active_>span]:scale-125"
           >
             <span
-              class="transition material-symbols-rounded group-active:scale-125"
+              class="material-symbols-rounded transition group-active:scale-125"
             >
               add
             </span>
@@ -459,7 +469,7 @@
         </div>
       </div>
       <!-- End Toolbar -->
-      <canvas class="w-full h-screen cursor-none" id="my-canvas"></canvas>
+      <canvas class="h-screen w-full cursor-none" id="my-canvas"></canvas>
     </div>
     <!-- end container -->
     <!-- Color picker -->
@@ -504,7 +514,7 @@
             <button
               type="button"
               type="button"
-              class="text-gray-500 btn btn-secondary"
+              class="btn btn-secondary text-gray-500"
               data-bs-dismiss="modal"
             >
               Cancel
@@ -516,6 +526,52 @@
               id="clear-canvas-button"
             >
               Confirm
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- Help modal -->
+    <div
+      class="modal fade"
+      id="help"
+      tabindex="-1"
+      aria-labelledby="helpModal"
+      aria-hidden="true"
+    >
+      <div class="modal-dialog modal-dialog-scrollable !max-w-4xl">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="helpModal">Help</h5>
+            <button
+              type="button"
+              type="button"
+              class="btn-close"
+              data-bs-dismiss="modal"
+              aria-label="Close"
+            ></button>
+          </div>
+          <div class="modal-body">
+            <table class="table border-collapse">
+              <thead>
+                <tr>
+                  <th scope="col" width="180">Key</th>
+                  <th scope="col">Name</th>
+                  <th scope="col">Description</th>
+                </tr>
+              </thead>
+              <tbody id="help-modal-body"></tbody>
+            </table>
+          </div>
+          <div class="modal-footer">
+            <button
+              type="button"
+              type="button"
+              class="btn btn-default text-gray-500"
+              id="clear-canvas-button"
+              data-bs-dismiss="modal"
+            >
+              Okay
             </button>
           </div>
         </div>

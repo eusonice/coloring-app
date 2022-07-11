@@ -48,8 +48,9 @@
   .button-focus-default:focus-visible {
     @apply focus:ring-2 focus:ring-gray-500 focus:ring-offset-2;
   }
-  .btn-solid-picker {
-    @apply relative flex h-9 w-9 items-center justify-center rounded-full ring-gray-700 transition hover:ring-2 hover:ring-gray-500 hover:ring-offset-2 active:scale-95 [&.active_>span]:opacity-100 [&_>span]:opacity-0;
+  .btn-solid-picker,
+  .color-picker {
+    @apply relative flex h-9 w-9 items-center justify-center rounded-full ring-gray-700 transition hover:ring-2 hover:ring-gray-500 hover:ring-offset-2 focus-visible:ring-2 focus-visible:ring-gray-500 focus-visible:ring-offset-2 active:scale-95 [&.active_>span]:opacity-100 [&_>span]:opacity-0;
   }
   .btn-solid-picker-ring {
     @apply h-6 w-6 rounded-full ring-2 ring-white transition-opacity;
@@ -60,8 +61,9 @@
   .color-removeable-wrap .btn-solid-remove {
     @apply pointer-events-none absolute bottom-14 -left-3 z-10 mx-auto mb-1 cursor-pointer rounded-lg border border-gray-900 bg-gray-800 !py-1 !px-2 text-sm text-white opacity-0 shadow-lg shadow-gray-300/30 transition delay-75;
   }
-  .color-removeable-wrap:hover .btn-solid-remove {
-    @apply pointer-events-auto opacity-100 delay-500;
+  .color-removeable-wrap:hover .btn-solid-remove,
+  .color-removeable-wrap:focus-within .btn-solid-remove {
+    @apply pointer-events-auto opacity-100 delay-500 focus-within:delay-75 focus-visible:ring-2 focus-visible:ring-gray-500 focus-visible:ring-offset-2;
   }
   .color-removeable-wrap .btn-solid-remove::after {
     @apply absolute h-4 w-4 rounded bg-gray-800 content-[""];
@@ -70,7 +72,7 @@
     transform: translate(-50%, -50%) rotate(135deg);
   }
   .toast {
-    @apply absolute z-50 !left-4 !bottom-4 !px-4 !py-1.5 rounded-full inline w-fit !border-gray-100 !shadow-gray-300/50 !shadow-xl !text-gray-500 !text-sm font-medium;
+    @apply absolute !left-4 !bottom-4 z-50 inline w-fit rounded-full !border-gray-100 !px-4 !py-1.5 !text-sm font-medium !text-gray-500 !shadow-xl !shadow-gray-300/50;
   }
 }
 
@@ -114,7 +116,6 @@ input:focus {
   outline: none;
   -webkit-box-shadow: none;
 }
-
 /* https://developer.mozilla.org/en-US/docs/Web/HTML/Element/kbd */
 kbd {
   background-color: #eee;
