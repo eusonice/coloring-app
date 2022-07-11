@@ -54,6 +54,7 @@ export function updateCurrentColor(newColor, mode = "toolbar") {
   } else {
     updateMultiPickerColor(undefined);
   }
+  window.updateGUI();
 }
 
 $(window).on("load", function () {

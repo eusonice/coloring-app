@@ -276,7 +276,6 @@ export const shortcuts = [
 const helpModalBody = document.getElementById("help-modal-body");
 function mapKbd(triggerSplit, triggerKbdWrap) {
   return triggerSplit.map((kbd) => {
-    console.log(kbd);
     if (kbd === "+") {
       triggerKbdWrap.appendChild(document.createTextNode(" + "));
     } else {

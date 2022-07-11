@@ -132,10 +132,12 @@ $(document).ready(() => {
     $(`#slider-${slider.id}`).on("input", function () {
       initPreviewPopover();
       updateSlider(slider.id, $(this).val());
+      window.updateGUI();
     });
     $(`#slider-input-${slider.id}`).on("input", function () {
       initPreviewPopover();
       updateSlider(slider.id, $(this).val());
+      window.updateGUI();
     });
   });
 
