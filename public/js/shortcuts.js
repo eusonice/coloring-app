@@ -88,111 +88,15 @@ export const shortcuts = [
     description: "Switch to color picker tool",
   },
   {
-    triggers: ["alt+1"],
-    name: "First solid or custom color",
+    triggers: ["alt+0", "...", "alt+9"],
+    name: "Switch Color",
     description:
-      "Switch to 1st solid color \nOr 1st custom color in color picker mode",
+      "Switch to the active color, either in the canvas or in the color picker",
   },
   {
-    triggers: ["alt+2"],
-    name: "Second solid or custom color",
-    description:
-      "Switch to 2nd solid color \nOr 2nd custom color in color picker mode",
-  },
-  {
-    triggers: ["alt+3"],
-    name: "Third solid or custom color",
-    description:
-      "Switch to 3rd solid color \nOr 3rd custom color in color picker mode",
-  },
-  {
-    triggers: ["alt+4"],
-    name: "Fourth solid or custom color",
-    description:
-      "Switch to 4th solid color \nOr 4th custom color in color picker mode",
-  },
-  {
-    triggers: ["alt+5"],
-    name: "First gradient color or fifth custom color",
-    description:
-      "Switch to 1st gradient color \nOr 5th custom color in color picker mode",
-  },
-  {
-    triggers: ["alt+6"],
-    name: "Second gradient color or sixth custom color",
-    description:
-      "Switch to 2nd gradient color \nOr 6th custom color in color picker mode",
-  },
-  {
-    triggers: ["alt+7"],
-    name: "Third gradient color or seventh custom color",
-    description:
-      "Switch to 3rd gradient color \nOr 7th custom color in color picker mode",
-  },
-  {
-    triggers: ["alt+8"],
-    name: "Eighth custom color",
-    description: "Switch to 8th custom color in color picker mode",
-  },
-  {
-    triggers: ["alt+9"],
-    name: "Ninth custom color",
-    description: "Switch to 9th custom color in color picker mode",
-  },
-  {
-    triggers: ["alt+0"],
-    name: "Tenth custom color",
-    description: "Switch to 10th custom color in color picker mode",
-  },
-  {
-    triggers: ["alt+shift+1"],
-    name: "First custom color",
-    description: "Switch to 1st custom color",
-  },
-  {
-    triggers: ["alt+shift+2"],
-    name: "Second custom color",
-    description: "Switch to 2nd custom color",
-  },
-  {
-    triggers: ["alt+shift+3"],
-    name: "Third custom color",
-    description: "Switch to 3rd custom color",
-  },
-  {
-    triggers: ["alt+shift+4"],
-    name: "Fourth custom color",
-    description: "Switch to 4th custom color",
-  },
-  {
-    triggers: ["alt+shift+5"],
-    name: "Fifth custom color",
-    description: "Switch to 5th custom color",
-  },
-  {
-    triggers: ["alt+shift+6"],
-    name: "Sixth custom color",
-    description: "Switch to 6th custom color",
-  },
-  {
-    triggers: ["alt+shift+7"],
-    name: "Seventh custom color",
-    description: "Switch to 7th custom color",
-  },
-  {
-    triggers: ["alt+shift+8"],
-    name: "Eighth custom color",
-    description: "Switch to 8th custom color",
-  },
-  {
-    triggers: ["alt+shift+9"],
-    name: "Ninth custom color",
-    description: "Switch to 9th custom color",
-  },
-  {
-    triggers: ["alt+shift+0"],
-    name: "Tenth custom color",
-    description: "Switch to 10th custom color",
+    triggers: ["alt+shift+0", "...", "alt+shift+9"],
+    name: "Custom color",
+    description: "Switch to 1st or 10th custom color",
   },
   {
     triggers: ["z"],
@@ -286,35 +190,60 @@ function mapKbd(triggerSplit, triggerKbdWrap) {
   });
 }
 shortcuts.forEach((shortcut) => {
-  const shortcutTr = document.createElement("tr");
-  shortcutTr.classList.add("shortcut");
+  const shortcutCardWrap = document.createElement("div");
+  shortcutCardWrap.classList.add(
+    "shortcut",
+    "!p-4",
+    "!border",
+    "!border-gray-100",
+    "!rounded-lg",
+    "!bg-white",
+    "flex",
+    "items-end",
+    "justify-between",
+    "!gap-4"
+  );
   // triggers div, split by +, join by +, splitted element is a kbd tag
+  const triggerKbdWrap = document.createElement("div");
   const triggers = shortcut.triggers.map((trigger) => {
-    const triggerKbdWrap = document.createElement("td");
+    const triggerKbdDiv = document.createElement("div");
     const triggerSplit = trigger.split(/(\+)/);
+    triggerKbdWrap.classList.add("min-w-[140px]");
+    triggerKbdDiv.classList.add("!text-gray-400");
     if (triggerSplit[0] === "mod") {
       // for mac the mod key symbol is ⌘
       let modMac = triggerSplit;
       modMac[0] = "⌘";
-      mapKbd(modMac, triggerKbdWrap);
+      mapKbd(modMac, triggerKbdDiv);
       // Add a br to the end of the mod key
-      triggerKbdWrap.appendChild(document.createElement("br"));
+      triggerKbdDiv.appendChild(document.createElement("br"));
       let modWin = triggerSplit;
       modWin[0] = "ctrl";
-      mapKbd(modWin, triggerKbdWrap);
+      mapKbd(modWin, triggerKbdDiv);
     } else {
-      mapKbd(triggerSplit, triggerKbdWrap);
+      mapKbd(triggerSplit, triggerKbdDiv);
     }
-    return triggerKbdWrap;
+    return triggerKbdDiv;
   });
-  shortcutTr.append(...triggers);
-  const name = document.createElement("td");
-  name.innerText = shortcut.name;
-  shortcutTr.appendChild(name);
-  const description = document.createElement("td");
+  triggerKbdWrap.append(...triggers);
+  shortcutCardWrap.appendChild(triggerKbdWrap);
+  const shortcutCardBody = document.createElement("div");
+  const nameH3 = document.createElement("h3");
+  nameH3.classList.add(
+    "!text-base",
+    "!text-gray-600",
+    "!font-semibold",
+    "!mt-1",
+    "text-right"
+  );
+  nameH3.innerText = shortcut.name;
+  const description = document.createElement("p");
+  description.classList.add("!text-sm", "!text-gray-600", "!text-right");
   description.innerText = shortcut.description;
-  shortcutTr.appendChild(description);
-  helpModalBody.append(shortcutTr);
+  shortcutCardBody.appendChild(nameH3);
+  shortcutCardBody.appendChild(description);
+  shortcutCardWrap.appendChild(shortcutCardBody);
+  helpModalBody.append(shortcutCardWrap);
 });
 
 // Simulate mouse keydown event
@@ -363,6 +292,11 @@ keyboardJS.bind("mod + s", (e) => {
 
 // SHORTCUT --- undo --- mod + z
 // Hint: check out the zoom in and zoom out shortcuts
+keyboardJS.bind("mod + z", (e) => {
+  e.preventDefault();
+  RUHandler.handle(new window.RUEvent(window.RUType.undo));
+  toast("Undo Stroke");
+});
 
 // SHORTCUT --- redo --- mod + shift + z
 

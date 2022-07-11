@@ -23,6 +23,11 @@
     <!-- Load the Paper.js library -->
     <script type="text/javascript" src="js/paper-full.js"></script>
     <!-- Define inlined PaperScript associate it with myCanvas -->
+    <!-- <script
+      type="text/paperscript"
+      src="js/undo-redo.js"
+      canvas="my-canvas"
+    ></script> -->
     <script
       type="text/paperscript"
       src="js/drawing-app.js"
@@ -547,7 +552,7 @@
       aria-hidden="true"
     >
       <div class="modal-dialog modal-dialog-scrollable !max-w-4xl">
-        <div class="modal-content">
+        <div class="modal-content !bg-gray-50">
           <div class="modal-header">
             <h5 class="modal-title" id="helpModal">Help</h5>
             <button
@@ -559,16 +564,10 @@
             ></button>
           </div>
           <div class="modal-body">
-            <table class="table border-collapse">
-              <thead>
-                <tr>
-                  <th scope="col" width="180">Key</th>
-                  <th scope="col">Name</th>
-                  <th scope="col">Description</th>
-                </tr>
-              </thead>
-              <tbody id="help-modal-body"></tbody>
-            </table>
+            <div
+              class="!grid !grid-cols-2 !place-content-stretch !place-items-stretch !gap-4"
+              id="help-modal-body"
+            ></div>
           </div>
           <div class="modal-footer">
             <button
