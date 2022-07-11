@@ -999,7 +999,6 @@ video {
   transition-delay: 500ms;
 }
 
-
 .color-removeable-wrap:hover .btn-solid-remove:focus-within, 
   .color-removeable-wrap:focus-within .btn-solid-remove:focus-within {
   transition-delay: 75ms;
@@ -1076,6 +1075,8 @@ video {
 .pointer-events-auto {
   pointer-events: auto;
 }
+
+.visible {
   visibility: visible;
 }
 
@@ -1163,11 +1164,12 @@ video {
   margin-right: auto;
 }
 
-.\!-mb-4 {
-  margin-bottom: -1rem !important;
-}
 .-mr-4 {
   margin-right: -1rem;
+}
+
+.\!mt-1 {
+  margin-top: 0.25rem !important;
 }
 
 .block {
@@ -1182,12 +1184,12 @@ video {
   display: flex;
 }
 
-.table {
-  display: table;
-}
-
 .grid {
   display: grid;
+}
+
+.\!grid {
+  display: grid !important;
 }
 
 .hidden {
@@ -1270,20 +1272,20 @@ video {
   width: 1.5rem;
 }
 
+.min-w-\[200px\] {
+  min-width: 200px;
+}
+
+.min-w-\[160px\] {
+  min-width: 160px;
+}
+
+.min-w-\[140px\] {
+  min-width: 140px;
+}
+
 .max-w-\[200px\] {
   max-width: 200px;
-}
-
-.max-w-2xl {
-  max-width: 42rem;
-}
-
-.\!max-w-2xl {
-  max-width: 42rem !important;
-}
-
-.\!max-w-3xl {
-  max-width: 48rem !important;
 }
 
 .\!max-w-4xl {
@@ -1292,10 +1294,6 @@ video {
 
 .flex-shrink-0 {
   flex-shrink: 0;
-}
-
-.border-collapse {
-  border-collapse: collapse;
 }
 
 .translate-y-4 {
@@ -1333,16 +1331,36 @@ video {
   grid-template-columns: repeat(4, minmax(0, 1fr));
 }
 
+.\!grid-cols-2 {
+  grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+}
+
 .grid-rows-2 {
   grid-template-rows: repeat(2, minmax(0, 1fr));
+}
+
+.flex-col {
+  flex-direction: column;
 }
 
 .place-content-center {
   place-content: center;
 }
 
+.\!place-content-stretch {
+  place-content: stretch !important;
+}
+
 .place-items-center {
   place-items: center;
+}
+
+.\!place-items-stretch {
+  place-items: stretch !important;
+}
+
+.items-start {
+  align-items: flex-start;
 }
 
 .items-end {
@@ -1355,6 +1373,10 @@ video {
 
 .justify-start {
   justify-content: flex-start;
+}
+
+.justify-end {
+  justify-content: flex-end;
 }
 
 .justify-center {
@@ -1383,6 +1405,10 @@ video {
 
 .gap-1 {
   gap: 0.25rem;
+}
+
+.\!gap-4 {
+  gap: 1rem !important;
 }
 
 .overflow-hidden {
@@ -1425,8 +1451,16 @@ video {
   border-radius: 0.75rem !important;
 }
 
+.\!rounded-lg {
+  border-radius: 0.5rem !important;
+}
+
 .border {
   border-width: 1px;
+}
+
+.\!border {
+  border-width: 1px !important;
 }
 
 .border-gray-100 {
@@ -1476,6 +1510,16 @@ video {
 
 .bg-black\/30 {
   background-color: rgb(0 0 0 / 0.3);
+}
+
+.\!bg-gray-50 {
+  --tw-bg-opacity: 1 !important;
+  background-color: rgb(249 250 251 / var(--tw-bg-opacity)) !important;
+}
+
+.\!bg-white {
+  --tw-bg-opacity: 1 !important;
+  background-color: rgb(255 255 255 / var(--tw-bg-opacity)) !important;
 }
 
 .bg-gradient-to-r {
@@ -1566,9 +1610,31 @@ video {
   text-align: center;
 }
 
+.text-right {
+  text-align: right;
+}
+
+.\!text-right {
+  text-align: right !important;
+}
+
 .text-sm {
   font-size: 0.875rem;
   line-height: 1.25rem;
+}
+
+.\!text-base {
+  font-size: 1rem !important;
+  line-height: 1.5rem !important;
+}
+
+.\!text-sm {
+  font-size: 0.875rem !important;
+  line-height: 1.25rem !important;
+}
+
+.\!font-semibold {
+  font-weight: 600 !important;
 }
 
 .capitalize {
@@ -1590,6 +1656,16 @@ video {
   color: rgb(244 63 94 / var(--tw-text-opacity));
 }
 
+.\!text-gray-400 {
+  --tw-text-opacity: 1 !important;
+  color: rgb(156 163 175 / var(--tw-text-opacity)) !important;
+}
+
+.\!text-gray-600 {
+  --tw-text-opacity: 1 !important;
+  color: rgb(75 85 99 / var(--tw-text-opacity)) !important;
+}
+
 .opacity-0 {
   opacity: 0;
 }
@@ -1609,7 +1685,6 @@ video {
   --tw-shadow-colored: 0 20px 25px -5px var(--tw-shadow-color), 0 8px 10px -6px var(--tw-shadow-color) !important;
   box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow) !important;
 }
-
 
 .\!shadow-2xl {
   --tw-shadow: 0 25px 50px -12px rgb(0 0 0 / 0.25) !important;
@@ -1760,17 +1835,17 @@ input:focus {
 /* https://developer.mozilla.org/en-US/docs/Web/HTML/Element/kbd */
 
 kbd {
-  background-color: #eee;
+  background-color: #f9f9f9;
   border-radius: 3px;
-  border: 1px solid #b4b4b4;
-  box-shadow: 0 1px 1px rgba(0, 0, 0, 0.2),
-    0 2px 0 0 rgba(255, 255, 255, 0.7) inset;
-  color: #333;
+  border: 1px solid #e3e3e3;
+  box-shadow: 0 1px 1px rgba(0, 0, 0, 0.1),
+    0 2px 0 0 rgba(255, 255, 255, 0.475) inset;
+  color: #555555;
   display: inline-block;
   font-size: 0.85em;
   font-weight: 700;
   line-height: 1;
-  padding: 2px 4px;
+  padding: 3px 4.5px;
   white-space: nowrap;
 }
 
