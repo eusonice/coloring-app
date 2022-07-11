@@ -1,4 +1,4 @@
-This is Oliver's Branch
+Coloring Book App 🎨
 
 ## Features
 
@@ -60,6 +60,9 @@ This is Oliver's Branch
 | `q` | Increase brush angle | Increase brush angle by 5 degrees |
 | `shift` + `q` | Decrease brush angle | Decrease brush angle by 15 degrees |
 | `shift` + `/` | Help | Show help |
+
+
+## Screenshots
 
 ![5FC0A29D-F443-412C-A340-FC0147D70D94](https://user-images.githubusercontent.com/13263720/178132307-8288c94b-d16c-4b5e-b211-3f3685bc7bc2.png)
 
