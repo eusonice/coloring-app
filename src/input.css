@@ -48,6 +48,7 @@
   .button-focus-default:focus-visible {
     @apply focus:ring-2 focus:ring-gray-500 focus:ring-offset-2;
   }
+
   .btn-solid-picker,
   .color-picker {
     @apply relative flex h-9 w-9 items-center justify-center rounded-full ring-gray-700 transition hover:ring-2 hover:ring-gray-500 hover:ring-offset-2 focus-visible:ring-2 focus-visible:ring-gray-500 focus-visible:ring-offset-2 active:scale-95 [&.active_>span]:opacity-100 [&_>span]:opacity-0;

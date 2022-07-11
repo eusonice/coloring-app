@@ -999,6 +999,7 @@ video {
   transition-delay: 500ms;
 }
 
+
 .color-removeable-wrap:hover .btn-solid-remove:focus-within, 
   .color-removeable-wrap:focus-within .btn-solid-remove:focus-within {
   transition-delay: 75ms;
@@ -1075,8 +1076,6 @@ video {
 .pointer-events-auto {
   pointer-events: auto;
 }
-
-.visible {
   visibility: visible;
 }
 
@@ -1164,6 +1163,9 @@ video {
   margin-right: auto;
 }
 
+.\!-mb-4 {
+  margin-bottom: -1rem !important;
+}
 .-mr-4 {
   margin-right: -1rem;
 }
@@ -1607,6 +1609,7 @@ video {
   --tw-shadow-colored: 0 20px 25px -5px var(--tw-shadow-color), 0 8px 10px -6px var(--tw-shadow-color) !important;
   box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow) !important;
 }
+
 
 .\!shadow-2xl {
   --tw-shadow: 0 25px 50px -12px rgb(0 0 0 / 0.25) !important;
