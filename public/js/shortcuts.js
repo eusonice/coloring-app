@@ -59,27 +59,27 @@ import { toast } from "./util.js";
 export const shortcuts = [
   {
     triggers: ["mod+s"],
-    name: "save",
+    name: "Save",
     description: "Save the current drawing",
   },
   {
     triggers: ["mod+z"],
-    name: "undo",
+    name: "Undo",
     description: "Undo the last action",
   },
   {
     triggers: ["mod+shift+z"],
-    name: "redo",
+    name: "Redo",
     description: "Redo the last action",
   },
   {
     triggers: ["b"],
-    name: "brush",
+    name: "Brush",
     description: "Switch to brush tool",
   },
   {
     triggers: ["e"],
-    name: "eraser",
+    name: "Eraser",
     description: "Switch to eraser tool",
   },
   {
@@ -91,43 +91,43 @@ export const shortcuts = [
     triggers: ["alt+1"],
     name: "First solid or custom color",
     description:
-      "Switch to 1st solid color, or 1st custom color in color picker mode",
+      "Switch to 1st solid color \nOr 1st custom color in color picker mode",
   },
   {
     triggers: ["alt+2"],
     name: "Second solid or custom color",
     description:
-      "Switch to 2nd solid color, or 2nd custom color in color picker mode",
+      "Switch to 2nd solid color \nOr 2nd custom color in color picker mode",
   },
   {
     triggers: ["alt+3"],
     name: "Third solid or custom color",
     description:
-      "Switch to 3rd solid color, or 3rd custom color in color picker mode",
+      "Switch to 3rd solid color \nOr 3rd custom color in color picker mode",
   },
   {
     triggers: ["alt+4"],
     name: "Fourth solid or custom color",
     description:
-      "Switch to 4th solid color, or 4th custom color in color picker mode",
+      "Switch to 4th solid color \nOr 4th custom color in color picker mode",
   },
   {
     triggers: ["alt+5"],
     name: "First gradient color or fifth custom color",
     description:
-      "Switch to 1st gradient color, or 5th custom color in color picker mode",
+      "Switch to 1st gradient color \nOr 5th custom color in color picker mode",
   },
   {
     triggers: ["alt+6"],
     name: "Second gradient color or sixth custom color",
     description:
-      "Switch to 2nd gradient color, or 6th custom color in color picker mode",
+      "Switch to 2nd gradient color \nOr 6th custom color in color picker mode",
   },
   {
     triggers: ["alt+7"],
     name: "Third gradient color or seventh custom color",
     description:
-      "Switch to 3rd gradient color, or 7th custom color in color picker mode",
+      "Switch to 3rd gradient color \nOr 7th custom color in color picker mode",
   },
   {
     triggers: ["alt+8"],
@@ -271,8 +271,55 @@ export const shortcuts = [
   },
 ];
 
+// populate to the DOM inside the div id: help-modal-body
+// This could've been sooooo much easier if I could use React :(
+const helpModalBody = document.getElementById("help-modal-body");
+function mapKbd(triggerSplit, triggerKbdWrap) {
+  return triggerSplit.map((kbd) => {
+    if (kbd === "+") {
+      triggerKbdWrap.appendChild(document.createTextNode(" + "));
+    } else {
+      const kbdTag = document.createElement("kbd");
+      kbdTag.innerText = kbd;
+      triggerKbdWrap.appendChild(kbdTag);
+    }
+  });
+}
+shortcuts.forEach((shortcut) => {
+  const shortcutTr = document.createElement("tr");
+  shortcutTr.classList.add("shortcut");
+  // triggers div, split by +, join by +, splitted element is a kbd tag
+  const triggers = shortcut.triggers.map((trigger) => {
+    const triggerKbdWrap = document.createElement("td");
+    const triggerSplit = trigger.split(/(\+)/);
+    if (triggerSplit[0] === "mod") {
+      // for mac the mod key symbol is ⌘
+      let modMac = triggerSplit;
+      modMac[0] = "⌘";
+      mapKbd(modMac, triggerKbdWrap);
+      // Add a br to the end of the mod key
+      triggerKbdWrap.appendChild(document.createElement("br"));
+      let modWin = triggerSplit;
+      modWin[0] = "ctrl";
+      mapKbd(modWin, triggerKbdWrap);
+    } else {
+      mapKbd(triggerSplit, triggerKbdWrap);
+    }
+    return triggerKbdWrap;
+  });
+  shortcutTr.append(...triggers);
+  const name = document.createElement("td");
+  name.innerText = shortcut.name;
+  shortcutTr.appendChild(name);
+  const description = document.createElement("td");
+  description.innerText = shortcut.description;
+  shortcutTr.appendChild(description);
+  helpModalBody.append(shortcutTr);
+});
+
 // Simulate mouse keydown event
 function toggleButton(button, message = undefined) {
+  button.click();
   button.addClass("active");
   setTimeout(function () {
     button.removeClass("active");
@@ -394,3 +441,8 @@ keyboardJS.bind(["up", "w"], (e) => {
 // SHORTCUT --- decrease brush angle by 15 --- shift + q
 
 // SHORTCUT --- help (?) --- shift + /
+
+keyboardJS.bind("shift + /", (e) => {
+  const helpBtn = $("#help-button");
+  toggleButton(helpBtn, "Help");
+});
