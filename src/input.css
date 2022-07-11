@@ -1,0 +1,132 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer components {
+  .btn-icon-primary {
+    @apply flex h-10 w-10 items-center justify-center rounded-full text-gray-700 transition hover:bg-purple-50 active:bg-purple-100 [&>span]:hover:text-purple-700 [&>span]:active:text-purple-900;
+  }
+
+  .btn-icon-danger {
+    @apply flex h-10 w-10 items-center justify-center rounded-full text-gray-700 transition hover:bg-red-50 active:bg-red-100 [&>span]:hover:text-red-700 [&>span]:active:text-red-900;
+  }
+
+  .btn-icon-success {
+    @apply flex h-10 w-10 items-center justify-center rounded-full text-gray-700 transition hover:bg-green-50 active:bg-green-100 [&>span]:hover:text-green-700 [&>span]:active:text-green-900;
+  }
+
+  .btn-icon-warning {
+    @apply flex h-10 w-10 items-center justify-center rounded-full text-gray-700 transition hover:bg-orange-50 active:bg-orange-100 [&>span]:hover:text-orange-700 [&>span]:active:text-orange-900;
+  }
+
+  .btn-icon-info {
+    @apply flex h-10 w-10 items-center justify-center rounded-full text-gray-700 transition hover:bg-blue-50 active:bg-blue-100 [&>span]:hover:text-blue-700 [&>span]:active:text-blue-900;
+  }
+  .btn-icon-secondary {
+    @apply flex h-10 w-10 items-center justify-center rounded-full bg-gray-100 text-gray-700 transition hover:bg-gray-200 active:bg-gray-300 [&>span]:hover:text-gray-700 [&>span]:active:text-gray-900 [&.active]:bg-gray-300;
+  }
+
+  .app-slider::-webkit-slider-thumb {
+    @apply h-6 w-6 rounded-full bg-white shadow-md shadow-gray-400/50 ring-1 ring-inset ring-gray-100 transition 
+    hover:scale-105 active:shadow-gray-400;
+    -webkit-appearance: none;
+    appearance: none;
+  }
+  .app-slider:focus-within::-webkit-slider-thumb {
+    @apply ring-2 ring-purple-400;
+  }
+  .preview-circle {
+    @apply transition-colors;
+    box-shadow: 2px -1px 24px -8px rgba(0, 0, 0, 0.2) inset;
+    -webkit-box-shadow: 2px -1px 24px -8px rgba(0, 0, 0, 0.2) inset;
+    -moz-box-shadow: 2px -1px 24px -8px rgba(0, 0, 0, 0.2) inset;
+  }
+  .current-brush-color {
+    @apply transition-colors;
+  }
+
+  .button-focus-default:focus-visible {
+    @apply focus:ring-2 focus:ring-gray-500 focus:ring-offset-2;
+  }
+  .btn-solid-picker {
+    @apply relative flex h-9 w-9 items-center justify-center rounded-full ring-gray-700 transition hover:ring-2 hover:ring-gray-500 hover:ring-offset-2 active:scale-95 [&.active_>span]:opacity-100 [&_>span]:opacity-0;
+  }
+  .btn-solid-picker-ring {
+    @apply h-6 w-6 rounded-full ring-2 ring-white transition-opacity;
+  }
+  .color-removeable-wrap {
+    @apply -mb-5 h-14;
+  }
+  .color-removeable-wrap .btn-solid-remove {
+    @apply pointer-events-none absolute bottom-14 -left-3 z-10 mx-auto mb-1 cursor-pointer rounded-lg border border-gray-900 bg-gray-800 !py-1 !px-2 text-sm text-white opacity-0 shadow-lg shadow-gray-300/30 transition delay-75;
+  }
+  .color-removeable-wrap:hover .btn-solid-remove {
+    @apply pointer-events-auto opacity-100 delay-500;
+  }
+  .color-removeable-wrap .btn-solid-remove::after {
+    @apply absolute h-4 w-4 rounded bg-gray-800 content-[""];
+    left: 50%;
+    top: 100%;
+    transform: translate(-50%, -50%) rotate(135deg);
+  }
+  .toast {
+    @apply absolute z-50 !left-4 !bottom-4 !px-4 !py-1.5 rounded-full inline w-fit !border-gray-100 !shadow-gray-300/50 !shadow-xl !text-gray-500 !text-sm font-medium;
+  }
+}
+
+/* https://csslayout.io/popover-arrow/ */
+.container__arrow--tc {
+  /* Position at the top center */
+  left: 50%;
+  top: 0px;
+
+  /* Border */
+  /* border-left: 1px solid rgba(0, 0, 0, 0.3);
+    border-top: 1px solid rgba(0, 0, 0, 0.3); */
+  transform: translate(-50%, -50%) rotate(45deg);
+}
+.container__arrow--bc {
+  /* Position at the bottom center */
+  left: 50%;
+  top: 100%;
+  transform: translate(-50%, -50%) rotate(135deg);
+}
+.container__arrow--bl {
+  /* Position at the bottom left */
+  left: 18px;
+  top: calc(100% - 2px);
+  transform: translate(-50%, -50%) rotate(225deg);
+}
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+/* Fixes for bootstrap */
+a {
+  color: inherit !important;
+  text-decoration: inherit !important;
+}
+button:focus,
+button:active,
+input:focus {
+  outline: none;
+  -webkit-box-shadow: none;
+}
+
+/* https://developer.mozilla.org/en-US/docs/Web/HTML/Element/kbd */
+kbd {
+  background-color: #eee;
+  border-radius: 3px;
+  border: 1px solid #b4b4b4;
+  box-shadow: 0 1px 1px rgba(0, 0, 0, 0.2),
+    0 2px 0 0 rgba(255, 255, 255, 0.7) inset;
+  color: #333;
+  display: inline-block;
+  font-size: 0.85em;
+  font-weight: 700;
+  line-height: 1;
+  padding: 2px 4px;
+  white-space: nowrap;
+}

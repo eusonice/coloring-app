@@ -33,6 +33,9 @@ app.use(express.static(publicPath));  //tell express to use that folder
 router.get("/", function (req, res) {
     res.sendFile(path.join(__dirname, "/"));
 });
+app.get('/canvas', function (req, res) {
+  res.sendFile(publicPath + '/canvas.html');
+});
 
 //depending on what url extension the user navigates to, send them the respective html file. 
 /* // this example app has no additional pages besides the index, so I've commented these out for now.
