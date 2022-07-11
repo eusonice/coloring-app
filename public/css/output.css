@@ -1164,6 +1164,10 @@ video {
   margin-right: auto;
 }
 
+.\!-mb-4 {
+  margin-bottom: -1rem !important;
+}
+
 .-mr-4 {
   margin-right: -1rem;
 }
@@ -1182,6 +1186,10 @@ video {
 
 .flex {
   display: flex;
+}
+
+.table {
+  display: table;
 }
 
 .grid {
