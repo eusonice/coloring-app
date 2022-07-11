@@ -24,3 +24,42 @@ export function rgbToHex(rgb) {
     "#" + componentToHex(r) + componentToHex(g) + componentToHex(b);
   return output;
 }
+
+export function toast(
+  message,
+  {
+    type = "default", // "default", "success", "error", "warning", "color"
+  } = {}
+) {
+  const toast = document.createElement("div");
+  toast.classList.add("toast");
+  toast.setAttribute("role", "alert");
+  toast.setAttribute("aria-live", "polite");
+  if (type === "default" || typeof type === "undefined") {
+    toast.innerHTML = message;
+  } else if (type === "color") {
+    toast.innerHTML = `
+    <div class="flex items-center gap-2">
+      <span>Set color to</span>
+      <div class="w-4 h-4 rounded-full ring-2 ring-gray-200" style="background-color: ${message}"></div>
+    </div>
+    `;
+  }
+  document.body.appendChild(toast);
+  const bootstratpToast = new bootstrap.Toast(toast, {
+    autohide: true,
+    delay: 700,
+  });
+  // check if toast is already shown, if not, show it
+  if (document.querySelectorAll(".toast").length > 1) {
+    const toasts = document.querySelectorAll(".toast");
+    const lastToast = toasts[toasts.length - 1];
+    // remove last toast
+    lastToast.remove();
+  } else {
+    bootstratpToast.show();
+    setTimeout(() => {
+      toast.remove();
+    }, 1100);
+  }
+}

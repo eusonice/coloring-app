@@ -1,6 +1,7 @@
 import { solidColors, updateSlider } from "./toolbar.js";
 import { updateCurrentColor } from "./color-picker.js";
 import { getStorage } from "./storage.js";
+import { toast } from "./util.js";
 /* 
     This is a file that contains all the shortcuts for the application.
 
@@ -10,35 +11,49 @@ import { getStorage } from "./storage.js";
     https://github.com/RobertWHurst/KeyboardJS
 
     Note: mod == cmd on Mac, ctrl on Windows.
-    Shortcuts:
-        - mod + s = save
-        - mod + z = undo
-        - mod + shift + z = redo
-        - b = brush tool
-        - e = eraser tool
-        - c = color picker
-        - alt + 1 = 1st solid color
-        - alt + 2 = 2nd solid color
-        - alt + 3 = 3rd solid color
-        - alt + 4 = 4th solid color
-        - alt + 5 = 1st gradient color
-        - alt + 6 = 2nd gradient color
-        - alt + 7 = 3rd gradient color
-        - z = zoom in
-        - x = zoom out
-        - up, w = increase brush height by 5
-        - shift + up, shift + w = increase brush height by 10
-        - down, s = decrease brush height by 5
-        - shift + down, shift + s = decrease brush height by 10
-        - left, a = decrease brush width by 5
-        - shift + left, shift + a = decrease brush width by 10
-        - right, d = increase brush width by 5
-        - shift + right, shift + d = increase brush width by 10
-        - e = increase brush angle by 5 degrees
-        - shift + e = increase brush angle by 15 degrees
-        - q = decrease brush angle by 5 degrees
-        - shift + q = decrease brush angle by 15 degrees
-        - shift + / = (?) = show help
+
+    Shortcuts lists:
+    - mod + s = Save
+    - mod + z = Undo
+    - mod + shift + z = Redo
+    - b = Brush tool
+    - e = Eraser tool
+    - c = Color picker tool
+    - alt + 1 = First solid color or first custom color in color picker mode
+    - alt + 2 = Second solid color or second custom color in color picker mode
+    - alt + 3 = Third solid color or third custom color in color picker mode
+    - alt + 4 = Fourth solid color or fourth custom color in color picker mode
+    - alt + 5 = First gradient color or fifth custom color in color picker mode
+    - alt + 6 = Second gradient color or sixth custom color in color picker mode
+    - alt + 7 = Third gradient color or seventh custom color in color picker mode
+    - alt + 8 = Eighth custom color in color picker mode
+    - alt + 9 = Ninth custom color in color picker mode
+    - alt + 0 = Tenth custom color in color picker mode
+    - alt + shift + 1 = First custom color in color picker mode
+    - alt + shift + 2 = Second custom color in color picker mode
+    - alt + shift + 3 = Third custom color in color picker mode
+    - alt + shift + 4 = Fourth custom color in color picker mode
+    - alt + shift + 5 = Fifth custom color in color picker mode
+    - alt + shift + 6 = Sixth custom color in color picker mode
+    - alt + shift + 7 = Seventh custom color in color picker mode
+    - alt + shift + 8 = Eighth custom color in color picker mode
+    - alt + shift + 9 = Ninth custom color in color picker mode
+    - alt + shift + 0 = Tenth custom color in color picker mode
+    - z = Zoom in
+    - x, shift + z = Zoom out
+    - up = Increase brush height by 5
+    - shift + up = Increase brush height by 10
+    - down = Decrease brush height by 5
+    - shift + down = Decrease brush height by 10
+    - left = Decrease brush width by 5
+    - shift + left = Decrease brush width by 10
+    - right = Increase brush width by 5
+    - shift + right = Increase brush width by 10
+    - e = Increase brush angle by 5 degrees
+    - shift + e = Increase brush angle by 15 degrees
+    - q = Increase brush angle by 5 degrees
+    - shift + q = Decrease brush angle by 15 degrees
+    - shift + / = Help
 */
 
 export const shortcuts = [
@@ -74,86 +89,158 @@ export const shortcuts = [
   },
   {
     triggers: ["alt+1"],
-    name: "First solid color",
-    description: "Switch to 1st solid color",
+    name: "First solid or custom color",
+    description:
+      "Switch to 1st solid color, or 1st custom color in color picker mode",
   },
   {
     triggers: ["alt+2"],
-    name: "Second solid color",
-    description: "Switch to 2nd solid color",
+    name: "Second solid or custom color",
+    description:
+      "Switch to 2nd solid color, or 2nd custom color in color picker mode",
   },
   {
     triggers: ["alt+3"],
-    name: "Third solid color",
-    description: "Switch to 3rd solid color",
+    name: "Third solid or custom color",
+    description:
+      "Switch to 3rd solid color, or 3rd custom color in color picker mode",
   },
   {
     triggers: ["alt+4"],
-    name: "Fourth solid color",
-    description: "Switch to 4th solid color",
+    name: "Fourth solid or custom color",
+    description:
+      "Switch to 4th solid color, or 4th custom color in color picker mode",
   },
   {
     triggers: ["alt+5"],
-    name: "First gradient color",
-    description: "Switch to 1st gradient color",
+    name: "First gradient color or fifth custom color",
+    description:
+      "Switch to 1st gradient color, or 5th custom color in color picker mode",
   },
   {
     triggers: ["alt+6"],
-    name: "Second gradient color",
-    description: "Switch to 2nd gradient color",
+    name: "Second gradient color or sixth custom color",
+    description:
+      "Switch to 2nd gradient color, or 6th custom color in color picker mode",
   },
   {
     triggers: ["alt+7"],
-    name: "Third gradient color",
-    description: "Switch to 3rd gradient color",
+    name: "Third gradient color or seventh custom color",
+    description:
+      "Switch to 3rd gradient color, or 7th custom color in color picker mode",
+  },
+  {
+    triggers: ["alt+8"],
+    name: "Eighth custom color",
+    description: "Switch to 8th custom color in color picker mode",
+  },
+  {
+    triggers: ["alt+9"],
+    name: "Ninth custom color",
+    description: "Switch to 9th custom color in color picker mode",
+  },
+  {
+    triggers: ["alt+0"],
+    name: "Tenth custom color",
+    description: "Switch to 10th custom color in color picker mode",
+  },
+  {
+    triggers: ["alt+shift+1"],
+    name: "First custom color",
+    description: "Switch to 1st custom color",
+  },
+  {
+    triggers: ["alt+shift+2"],
+    name: "Second custom color",
+    description: "Switch to 2nd custom color",
+  },
+  {
+    triggers: ["alt+shift+3"],
+    name: "Third custom color",
+    description: "Switch to 3rd custom color",
+  },
+  {
+    triggers: ["alt+shift+4"],
+    name: "Fourth custom color",
+    description: "Switch to 4th custom color",
+  },
+  {
+    triggers: ["alt+shift+5"],
+    name: "Fifth custom color",
+    description: "Switch to 5th custom color",
+  },
+  {
+    triggers: ["alt+shift+6"],
+    name: "Sixth custom color",
+    description: "Switch to 6th custom color",
+  },
+  {
+    triggers: ["alt+shift+7"],
+    name: "Seventh custom color",
+    description: "Switch to 7th custom color",
+  },
+  {
+    triggers: ["alt+shift+8"],
+    name: "Eighth custom color",
+    description: "Switch to 8th custom color",
+  },
+  {
+    triggers: ["alt+shift+9"],
+    name: "Ninth custom color",
+    description: "Switch to 9th custom color",
+  },
+  {
+    triggers: ["alt+shift+0"],
+    name: "Tenth custom color",
+    description: "Switch to 10th custom color",
   },
   {
     triggers: ["z"],
-    name: "zoom in",
+    name: "Zoom in",
     description: "Zoom in",
   },
   {
     triggers: ["x"],
-    name: "zoom out",
+    name: "Zoom out",
     description: "Zoom out",
   },
   {
-    triggers: ["up", "w"],
+    triggers: ["up"],
     name: "Increase brush height",
     description: "Increase brush height by 5",
   },
   {
-    triggers: ["shift+up", "shift+w"],
+    triggers: ["shift+up"],
     name: "Increase brush height",
     description: "Increase brush height by 10",
   },
   {
-    triggers: ["down", "s"],
+    triggers: ["down"],
     name: "Decrease brush height",
     description: "Decrease brush height by 5",
   },
   {
-    triggers: ["shift+down", "shift+s"],
+    triggers: ["shift+down"],
     name: "Decrease brush height",
     description: "Decrease brush height by 10",
   },
   {
-    triggers: ["left", "a"],
+    triggers: ["left"],
     name: "Decrease brush width",
     description: "Decrease brush width by 5",
   },
   {
-    triggers: ["shift+left", "shift+a"],
+    triggers: ["shift+left"],
     name: "Decrease brush width",
     description: "Decrease brush width by 10",
   },
   {
-    triggers: ["right", "d"],
+    triggers: ["right"],
     name: "Increase brush width",
     description: "Increase brush width by 5",
   },
   {
-    triggers: ["shift+right", "shift+d"],
+    triggers: ["shift+right"],
     name: "Increase brush width",
     description: "Increase brush width by 10",
   },
@@ -164,8 +251,8 @@ export const shortcuts = [
   },
   {
     triggers: ["shift+e"],
-    name: "Decrease brush angle",
-    description: "Decrease brush angle by 15 degrees",
+    name: "Increase brush angle",
+    description: "Increase brush angle by 15 degrees",
   },
   {
     triggers: ["q"],
@@ -185,11 +272,14 @@ export const shortcuts = [
 ];
 
 // Simulate mouse keydown event
-function toggleButton(button) {
+function toggleButton(button, message = undefined) {
   button.addClass("active");
   setTimeout(function () {
     button.removeClass("active");
   }, 250);
+  if (message) {
+    toast(message);
+  }
 }
 // bind color buttons with current storage
 export function bindColorButtons() {
@@ -198,9 +288,18 @@ export function bindColorButtons() {
     keyboardJS.withContext("picker", () => {
       for (let i = 1; i <= Math.min(customColors.length, 10); i++) {
         const k = i === 10 ? "0" : i;
-        keyboardJS.unbind(`alt + ${k}`, (e) => null);
+        keyboardJS.off(`alt + ${k}`, updateCurrentColor);
         keyboardJS.bind(`alt + ${k}`, (e) =>
-          updateCurrentColor(customColors[i - 1])
+          updateCurrentColor(customColors[i - 1], "multi")
+        );
+      }
+    });
+    keyboardJS.withContext("canvas", () => {
+      for (let i = 1; i <= Math.min(customColors.length, 10); i++) {
+        const k = i === 10 ? "0" : i;
+        keyboardJS.off(`alt + shift + ${k}`, updateCurrentColor);
+        keyboardJS.bind(`alt + shift + ${k}`, (e) =>
+          updateCurrentColor(customColors[i - 1], "multi")
         );
       }
     });
@@ -211,6 +310,7 @@ keyboardJS.setContext("canvas"); // Set the context to the canvas
 
 keyboardJS.bind("mod + s", (e) => {
   e.preventDefault(); // prevent browser from opening a save dialog
+  toast("Saving...");
   console.log("save drawing");
 });
 
@@ -252,15 +352,13 @@ bindColorButtons();
 keyboardJS.bind("z", (e) => {
   e.preventDefault();
   const btn = $("#zoomin-button");
-  toggleButton(btn);
-  console.log("zoom in");
+  toggleButton(btn, "Zoom In");
 });
-// SHORTCUT --- zoom out --- x
-keyboardJS.bind("x", (e) => {
+// SHORTCUT --- zoom out --- x, shift + z
+keyboardJS.bind(["x", "shift + z"], (e) => {
   e.preventDefault();
   const btn = $("#zoomout-button");
-  toggleButton(btn);
-  console.log("zoom out");
+  toggleButton(btn, "Zoom Out");
 });
 
 // SHORTCUT --- increase brush height by 5 --- arrow up, w
@@ -270,7 +368,7 @@ keyboardJS.bind(["up", "w"], (e) => {
   const currentValue = $("#slider-height").val();
   // Update the slider value (convert to int)
   updateSlider("height", Number(currentValue) + 5, false);
-  console.log("increase brush height by 5");
+  toast("Brush height + 5");
 });
 
 // SHORTCUT --- increase brush height by 10 --- shift + arrow up, shift + w

@@ -119,7 +119,7 @@ export function updateSlider(id, value, showPopover = true) {
     `linear-gradient(to right, rgb(192 132 252) ${percent}%, rgb(229 231 235) ${percent}%)`
   );
   // update the preview
-  updateStrokePreview(id);
+  updateStrokePreview(id, showPopover);
   // store the value to local storage based on id
   setStorage(id, value);
 }

@@ -69,6 +69,9 @@
     top: 100%;
     transform: translate(-50%, -50%) rotate(135deg);
   }
+  .toast {
+    @apply absolute z-50 !left-4 !bottom-4 !px-4 !py-1.5 rounded-full inline w-fit !border-gray-100 !shadow-gray-300/50 !shadow-xl !text-gray-500 !text-sm font-medium;
+  }
 }
 
 /* https://csslayout.io/popover-arrow/ */

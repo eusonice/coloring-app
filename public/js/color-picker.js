@@ -1,15 +1,20 @@
 import "https://cdn.skypack.dev/vanilla-colorful";
 import { bindColorButtons } from "./shortcuts.js";
 import { setStorage, getStorage } from "./storage.js";
-import { rgbToHex, isLight } from "./util.js";
+import { rgbToHex, isLight, toast } from "./util.js";
 
 const picker = document.querySelector("hex-color-picker");
 
 export function updateMultiPickerColor(color) {
   const colorPicker = document.querySelector(".color-picker-circle");
-  colorPicker.style.backgroundColor = color;
-  // Also update the hex-color-picker color attribute
-  picker.color = color;
+  if (color) {
+    colorPicker.style.backgroundColor = color;
+    // Also update the hex-color-picker color attribute
+    picker.color = color;
+  } else {
+    // make it transparent
+    colorPicker.style.backgroundColor = "transparent";
+  }
 }
 
 /* 
@@ -18,7 +23,7 @@ Any button with the class "color-picker" will open the color picker.
 A backdrop is added to the color picker to prevent it from being clicked.
 */
 
-export function updateCurrentColor(newColor) {
+export function updateCurrentColor(newColor, mode = "toolbar") {
   document.querySelectorAll(".current-brush-color").forEach((el) => {
     el.style.backgroundColor = newColor;
     el.style.fill = newColor;
@@ -32,13 +37,23 @@ export function updateCurrentColor(newColor) {
   document.querySelectorAll(".btn-solid-picker").forEach((el) => {
     el.classList.remove("active");
     const elColor = rgbToHex(el.style.backgroundColor);
-    if (elColor === newColor) {
+    if (elColor === newColor || el.style.backgroundColor === newColor) {
       el.classList.add("active");
+      // Show toast
+      toast(newColor, {
+        type: "color",
+      });
     }
   });
 
   // Set localStorage color
   setStorage("current-brush-color", newColor);
+
+  if (mode === "multi") {
+    updateMultiPickerColor(newColor);
+  } else {
+    updateMultiPickerColor(undefined);
+  }
 }
 
 $(window).on("load", function () {
@@ -58,8 +73,7 @@ $(window).on("load", function () {
     colorSelectButton.addEventListener(
       "click",
       function () {
-        updateCurrentColor(color);
-        updateMultiPickerColor(color);
+        updateCurrentColor(color, "multi");
       } // end of click event
     );
     colorDiv.append(colorSelectButton);
@@ -81,7 +95,6 @@ $(window).on("load", function () {
         bindColorButtons();
       } // end of click event
     );
-    bindColorButtons();
   }
 
   picker.addEventListener("color-changed", (event) => {
@@ -90,8 +103,7 @@ $(window).on("load", function () {
     // get current color value
     //   console.log(picker.color);
     // All .current-brush-color elements will be updated to the new color
-    updateCurrentColor(newColor);
-    updateMultiPickerColor(newColor);
+    updateCurrentColor(newColor, "multi");
   });
 
   /* 
@@ -150,6 +162,7 @@ $(window).on("load", function () {
       // display the current color in the preset color container
       $(".btn-solid-picker").removeClass("active");
       appendColorButton(currentColor);
+      bindColorButtons();
     } // end of addColorButton.addEventListener
   ); // end of addColorButton.addEventListener
   presetColorContainer.append(addColorButton);
