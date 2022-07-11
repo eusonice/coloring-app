@@ -10,7 +10,7 @@ This is Oliver's Branch
 * Redo/undo
     - Undo and redo actions
 * Keyboard shortcuts
-    - 28 keyboard shortcuts
+    - 40+ keyboard shortcuts
     - See shortcut table below
 * Help
     - Open the help page
@@ -35,8 +35,18 @@ This is Oliver's Branch
 | `alt` + `8` | Eighth custom color | Switch to 8th custom color in color picker mode |
 | `alt` + `9` | Ninth custom color | Switch to 9th custom color in color picker mode |
 | `alt` + `0` | Tenth custom color | Switch to 10th custom color in color picker mode |
+| `alt` + `shift` + `1` | First custom color | Switch to 1st custom color |
+| `alt` + `shift` + `2` | Second custom color | Switch to 2nd custom color |
+| `alt` + `shift` + `3` | Third custom color | Switch to 3rd custom color |
+| `alt` + `shift` + `4` | Fourth custom color | Switch to 4th custom color |
+| `alt` + `shift` + `5` | Fifth custom color | Switch to 5th custom color |
+| `alt` + `shift` + `6` | Sixth custom color | Switch to 6th custom color |
+| `alt` + `shift` + `7` | Seventh custom color | Switch to 7th custom color |
+| `alt` + `shift` + `8` | Eighth custom color | Switch to 8th custom color |
+| `alt` + `shift` + `9` | Ninth custom color | Switch to 9th custom color |
+| `alt` + `shift` + `0` | Tenth custom color | Switch to 10th custom color |
 | `z` | Zoom in | Zoom in |
-| `x` | Zoom out | Zoom out |
+| `x`, `shift + z` | Zoom out | Zoom out |
 | `up` | Increase brush height | Increase brush height by 5 |
 | `shift` + `up` | Increase brush height | Increase brush height by 10 |
 | `down` | Decrease brush height | Decrease brush height by 5 |
