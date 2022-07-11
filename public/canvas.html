@@ -6,10 +6,16 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <!-- Bootstrap -->
     <link
-      rel="stylesheet"
       href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor"
+      crossorigin="anonymous"
     />
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js"></script>
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2"
+      crossorigin="anonymous"
+    ></script>
     <!-- Include Tailwind Css -->
     <link href="css/output.css" rel="stylesheet" />
     <!-- Include Dark mode toggle -->
@@ -19,9 +25,11 @@
     <!-- Define inlined PaperScript associate it with myCanvas -->
     <script
       type="text/paperscript"
-      src="js/shms-drawing-app.js"
+      src="js/drawing-app.js"
       canvas="my-canvas"
     ></script>
+    <!--  -->
+    <script src="js/paper-offset.min.js"></script>
 
     <!--Google Material Symbols Font -->
     <link
@@ -210,10 +218,10 @@
       <!-- End Menu Bar -->
       <!-- Start Toolbar -->
       <div
-        class="fixed left-0 right-0 bottom-4 z-20 flex w-full items-center justify-center"
+        class="pointer-events-none fixed left-0 right-0 bottom-4 z-20 flex w-full items-center justify-center"
       >
         <div
-          class="flex items-center justify-between !gap-5 !rounded-3xl bg-white !py-4 !px-6 !shadow-2xl !shadow-gray-400/30"
+          class="pointer-events-auto flex items-center justify-between !gap-5 !rounded-3xl bg-white !py-4 !px-6 !shadow-2xl !shadow-gray-400/30"
         >
           <button
             type="button"
@@ -578,7 +586,6 @@
       </div>
     </div>
   </body>
-
   <script src="js/toolbar.js" type="module"></script>
   <script src="js/shortcuts.js" type="module"></script>
 </html>
