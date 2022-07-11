@@ -1,4 +1,4 @@
-Coloring Book App 🎨
+# Coloring Book App 🎨
 
 ## Features
 
