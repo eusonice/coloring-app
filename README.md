@@ -25,7 +25,7 @@
 | `b` | Brush | Switch to brush tool |
 | `e` | Eraser | Switch to eraser tool |
 | `c` | Color Picker | Switch to color picker tool |
-| `alt` + `0` ~ `9` | First solid or custom color | Switch to solid color, or custom color in color picker mode |
+| `alt` + `0` ~ `9` | Solid or custom color | Switch to solid color, or custom color in color picker mode |
 | `alt` + `shift` + `0` ~ `9` | Custom color | Switch to custom color |
 | `z` | Zoom in | Zoom in |
 | `x`, `shift + z` | Zoom out | Zoom out |
