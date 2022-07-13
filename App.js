@@ -39,6 +39,10 @@ app.get('/canvas', function (req, res) {
 app.get('/popular', function (req, res) {
   res.sendFile(publicPath + '/popular.html');
 });
+app.get('/home', function (req, res) {
+  res.sendFile(publicPath + '/home.html');
+});
+
 
 //depending on what url extension the user navigates to, send them the respective html file. 
 /* // this example app has no additional pages besides the index, so I've commented these out for now.
