@@ -25,26 +25,8 @@
 | `b` | Brush | Switch to brush tool |
 | `e` | Eraser | Switch to eraser tool |
 | `c` | Color Picker | Switch to color picker tool |
-| `alt` + `1` | First solid or custom color | Switch to 1st solid color, or 1st custom color in color picker mode |
-| `alt` + `2` | Second solid or custom color | Switch to 2nd solid color, or 2nd custom color in color picker mode |
-| `alt` + `3` | Third solid or custom color | Switch to 3rd solid color, or 3rd custom color in color picker mode |
-| `alt` + `4` | Fourth solid or custom color | Switch to 4th solid color, or 4th custom color in color picker mode |
-| `alt` + `5` | First gradient color or fifth custom color | Switch to 1st gradient color, or 5th custom color in color picker mode |
-| `alt` + `6` | Second gradient color or sixth custom color | Switch to 2nd gradient color, or 6th custom color in color picker mode |
-| `alt` + `7` | Third gradient color or seventh custom color | Switch to 3rd gradient color, or 7th custom color in color picker mode |
-| `alt` + `8` | Eighth custom color | Switch to 8th custom color in color picker mode |
-| `alt` + `9` | Ninth custom color | Switch to 9th custom color in color picker mode |
-| `alt` + `0` | Tenth custom color | Switch to 10th custom color in color picker mode |
-| `alt` + `shift` + `1` | First custom color | Switch to 1st custom color |
-| `alt` + `shift` + `2` | Second custom color | Switch to 2nd custom color |
-| `alt` + `shift` + `3` | Third custom color | Switch to 3rd custom color |
-| `alt` + `shift` + `4` | Fourth custom color | Switch to 4th custom color |
-| `alt` + `shift` + `5` | Fifth custom color | Switch to 5th custom color |
-| `alt` + `shift` + `6` | Sixth custom color | Switch to 6th custom color |
-| `alt` + `shift` + `7` | Seventh custom color | Switch to 7th custom color |
-| `alt` + `shift` + `8` | Eighth custom color | Switch to 8th custom color |
-| `alt` + `shift` + `9` | Ninth custom color | Switch to 9th custom color |
-| `alt` + `shift` + `0` | Tenth custom color | Switch to 10th custom color |
+| `alt` + `0` ~ `9` | First solid or custom color | Switch to solid color, or custom color in color picker mode |
+| `alt` + `shift` + `0` ~ `9` | Custom color | Switch to custom color |
 | `z` | Zoom in | Zoom in |
 | `x`, `shift + z` | Zoom out | Zoom out |
 | `up` | Increase brush height | Increase brush height by 5 |
