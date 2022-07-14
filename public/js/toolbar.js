@@ -36,6 +36,12 @@ const sliders = [
     max: 180,
     value: getStorage("angle") || 160,
   },
+  {
+    id: "eraser",
+    min: 1,
+    max: 100,
+    value: getStorage("eraser") || 16,
+  }
 ];
 
 export const solidColors = ["#2c99f2", "#31db57", "#ffe43e", "#ee4b2e"];
@@ -81,15 +87,25 @@ export function updateStrokePreview(id, showPopover = true) {
   // id is the id of the slider
   // this is to get the current position of the slider
   // so that the previewPopover can be shown at the right position
+  const isErasing = window.erase;
   const previews = document.querySelectorAll(".stroke-preview");
   const width = $("#slider-width").val();
   const height = $("#slider-height").val();
   const angle = $("#slider-angle").val();
-  previews.forEach((el) => {
-    el.style.width = width * 0.7 + "px";
-    el.style.height = height * 0.7 + "px";
-    el.style.transform = `rotate(${angle}deg)`;
-  });
+  const eraser = $("#slider-eraser").val();
+  if (isErasing) {
+    previews.forEach((el) => {
+      el.style.width = eraser * 0.7 + "px";
+      el.style.height = eraser * 0.7 + "px";
+      el.style.transform = `rotate(${angle}deg)`;
+    });
+  } else {
+    previews.forEach((el) => {
+      el.style.width = width * 0.7 + "px";
+      el.style.height = height * 0.7 + "px";
+      el.style.transform = `rotate(${angle}deg)`;
+    });
+  }
   // update the preview popover
   const position = $(`#slider-${id}`).position();
   if (showPopover) {
@@ -98,8 +114,8 @@ export function updateStrokePreview(id, showPopover = true) {
 }
 
 export function updateSlider(id, value, showPopover = true) {
-  const slider = $(`#slider-${id}`);
-  const input = $(`#slider-input-${id}`);
+  const slider = $(`#slider-${id}`); // silder
+  const input = $(`#slider-input-${id}`); // input field
   const { min, max } = sliders.find((slider) => slider.id === id);
 
   if (value < min) {
@@ -123,6 +139,7 @@ export function updateSlider(id, value, showPopover = true) {
   // update the preview
   updateStrokePreview(id, showPopover);
   // store the value to local storage based on id
+  // localStorage.setItem("width", 100);
   setStorage(id, value);
 }
 
@@ -213,4 +230,19 @@ For each .btn-solid-picker, apply the color from solidColors array.
   setTimeout(() => {
     updateCurrentColor(currentColor);
   }, 300);
+});
+
+/* https://stackoverflow.com/questions/11112321/how-to-save-canvas-as-png-image */
+function DownloadCanvasAsImage(){
+  let downloadLink = document.createElement('a');
+  downloadLink.setAttribute('download', 'CanvasAsImage.png');
+  let canvas = document.getElementById('my-canvas');
+  let dataURL = canvas.toDataURL('image/png');
+  let url = dataURL.replace(/^data:image\/png/,'data:application/octet-stream');
+  downloadLink.setAttribute('href', url);
+  downloadLink.click();
+}
+
+$("#download-button").on("click", function() {
+  DownloadCanvasAsImage();
 });

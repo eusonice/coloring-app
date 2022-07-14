@@ -1,9 +1,40 @@
-var path;
+var template = localStorage.getItem("current-template");
+template = JSON.parse(template);
+console.log("template", template);
+
+var raster = new Raster({
+  source: template.url,
+  position: view.center,
+});
+
+raster.fitBounds(view.bounds)
+
+view.onFrame = function(event) {
+  // resizeImg()
+  raster.bringToFront();
+}
+
+// function resizeImg() {
+//   raster.fitBounds(view.bounds)
+// }
+// add background color to the canvas
+var rect = new Path.Rectangle({
+  point: [0, 0],
+  size: [view.size.width, view.size.height],
+  strokeColor: 'white',
+  // selected: true
+});
+rect.sendToBack();
+rect.fillColor = '#ffffff';
+
+window.erase = false;
+var eraserPath;
 var currentColor = "black";
 var currentWidth = localStorage.getItem("width");
 var currentHeight = localStorage.getItem("height");
 var currentAngle = localStorage.getItem("angle");
-var brushCircle = new Path.Ellipse({
+var eraserSize = localStorage.getItem("eraser") || 16;
+window.brushCircle = new Path.Ellipse({
   point: [20, 20],
   size: [currentWidth, currentHeight],
   strokeColor: "black",
@@ -11,81 +42,63 @@ var brushCircle = new Path.Ellipse({
 });
 //-- helper function -- //
 
+
+
+
 window.updateGUI = function updateGUI() {
   currentColor = localStorage.getItem("current-brush-color");
-  currentWidth = localStorage.getItem("width");
+  currentWidth = localStorage.getItem("width"); // 100
   currentHeight = localStorage.getItem("height");
   currentAngle = localStorage.getItem("angle");
+  eraserSize = localStorage.getItem("eraser");
+  var pointSize = erase ? [eraserSize/2, eraserSize/2] : [currentWidth/2, currentHeight/2];
+  var currentSize = erase ? [eraserSize, eraserSize] : [currentWidth, currentHeight];
   brushCircle.style = {
-    point: [currentWidth / 2, currentHeight / 2],
-    size: [currentWidth, currentHeight],
-    strokeColor: currentColor,
-    // transform: "rotate(" + currentAngle + "deg)",
+    center: pointSize,
+    size: currentSize,
+    strokeColor: erase ? 'black' : currentColor,
+    strokeWidth: 1,
   };
-  brushCircle.scale(1);
 };
-
-var erase = false;
 updateGUI();
 
-function drawEllipse(event, shouldJoin) {
-  var size = Math.max(currentWidth, currentHeight);
-  var w = currentWidth;
-  var h = currentHeight;
-  var cx = event.point.x;
-  var cy = event.point.y;
-  var delta = event.delta;
-  var dx = delta.x;
-  var dy = delta.y;
-  // Join the path to the previous path based on delta
-  console.log(dx, dy);
-  var path2 = new Path({
-    segments: [
-      [cx - dx, cy - h / 2 - dy], // top left
-      [cx + w / 2, cy - h / 2], // top right
-      [cx - dx, cy + h / 2 - dy], // bottom left
-    ],
-    selected: true,
-  });
-  if (shouldJoin) {
-    path.join(path2);
+var circle;
+tool.maxDistance = 1;
+
+tool.onMouseDown = function (event) {
+  // Create a new path every time the mouse is clicked
+  if (erase == true){
+    eraserPath = new Path();
+    eraserPath.strokeWidth = eraserSize;
+    eraserPath.strokeColor = "white";
+    eraserPath.strokeJoin = "round";
+    eraserPath.add(event.point); //another thing that makes strokes smoother
+    updateGUI();
   }
-  // path.closePath();-
-  path.fillColor = currentColor;
-  path.bringToFront();
+};
+
+tool.onMouseDrag = function(event) {
+  if (erase == true) {
+    eraserPath.add(event.point);
+  }
+  else {
+    circle = new Path.Ellipse({
+      center: event.middlePoint,
+      size: [currentWidth, currentHeight],
+      fillColor: currentColor,
+    });
+	  circle.rotate(currentAngle);
+  }
+  brushCircle.position = event.point;
   updateGUI();
 }
 
-tool.onMouseDown = function (event) {
-  //draw a circle on click, gives the brush a circular "mark" feeling (makes our strokes look more "rounded")
-  path = new Path.Circle(event.point, currentWidth / 2);
-  path.fillColor = currentColor;
-
-  // Create a new path every time the mouse is clicked
-  path = new Path();
-  path.add(event.point);
-  path.strokeColor = currentColor;
-  path.strokeWidth = currentWidth;
-  path.strokeJoin = "round"; //another thing that makes strokes smoother
-  updateGUI();
-};
-tool.onMouseDrag = function (event) {
-  brushCircle.position = event.point;
-  path.add(event.point);
-  path.smooth(); //makes our strokes smoother
-  updateGUI();
-};
 tool.onMouseUp = function (event) {
-  //when stroke is over, have a circle mark end the path. again, makes our strokes look more "rounded"
-  path = new Path.Circle(event.point, currentWidth / 2);
-  path.fillColor = currentColor;
-  path.reduce();
-  updateGUI();
-};
-
-tool.onMouseMove = function (event) {
-  //have the brush circle preview move with the mouse
-  brushCircle.position = event.point;
+  if (erase == true){
+    eraserPath.add(event.point);
+    eraserPath.smooth(); //makes our strokes smoother
+    updateGUI();
+  }
 };
 
 tool.onMouseMove = function (event) {
@@ -96,39 +109,23 @@ tool.onMouseMove = function (event) {
 
 // -- button functionality --//
 
-$("#default").on("click", function (e) {
-  currentColor = "black";
-  currentWidth = 2;
+$("#brush").on("click", function(e) {
   erase = false;
-  updateGUI();
-});
-$("#thick-green").on("click", function (e) {
-  currentColor = "#438c4b";
-  erase = false;
-  updateGUI();
-});
-
-$("#yellow").on("click", function (e) {
-  currentColor = "#edbb3e";
-  erase = false;
-  updateGUI();
-});
-$("#blue").on("click", function (e) {
-  currentColor = "#324bad";
-  erase = false;
-  updateGUI();
-});
-$("#red").on("click", function (e) {
-  currentColor = "#d64b4b";
-  erase = false;
+  $("#eraser").removeClass("active");
+  $(".slider-wrap.slider-eraser").addClass("hidden");
+  $(".slider-wrap.slider-brush").removeClass("hidden");
+  $(this).addClass("active");
   updateGUI();
 });
 
 $("#eraser").on("click", function (e) {
   erase = true;
   currentColor = "white";
-  currentWidth = 20;
-
+  currentWidth = eraserSize;
+  $("#brush").removeClass("active");
+  $(".slider-wrap.slider-brush").addClass("hidden");
+  $(".slider-wrap.slider-eraser").removeClass("hidden");
+  $(this).addClass("active");
   updateGUI();
 });
 
@@ -152,11 +149,68 @@ $("#stroke-down").on("click", function (e) {
 $("#clear").on("click", function (e) {
   paper.project.activeLayer.removeChildren();
   paper.view.draw();
-  brushCircle = new Path.Circle({
-    center: [900, 900],
-    radius: 5,
-    strokeColor: "black",
-    strokeWidth: 1,
+  raster= new Raster({
+    source: template.url,
+    position: view.center,
   });
+  raster.bringToFront();
+  raster.fitBounds(view.bounds)
   updateGUI();
+});
+
+/* https://codepen.io/hichem147/pen/dExxNK */
+
+$("#zoomin-button").on("click", function(e) {
+  // raster.scale(1.25);
+  // view.scale(1.25);
+  paper.view.zoom = paper.view.zoom * 1.25;
+});
+
+$("#zoomout-button").on("click", function(e) {
+  //raster.scale(0.8);
+  //view.scale(0.8);
+  paper.view.zoom = paper.view.zoom * 0.8;
+});
+
+$('#my-canvas').on('mousewheel', function(event) {
+  var newZoom = paper.view.zoom; 
+  var oldZoom = paper.view.zoom;
+  
+  $("#reset-zoom-button").removeClass("hidden");
+  $("#zoomin-button").addClass("hidden");
+  $("#zoomout-button").addClass("hidden");
+
+  if (event.originalEvent.deltaY < 0) {			
+    newZoom = paper.view.zoom * 1.05;
+  } else {
+    newZoom = paper.view.zoom * 0.95;
+  }
+  
+  var beta = oldZoom / newZoom;
+  
+  var mousePosition = new paper.Point(event.offsetX, event.offsetY);
+  
+  //viewToProject: gives the coordinates in the Project space from the Screen Coordinates
+  var viewPosition = paper.view.viewToProject(mousePosition);
+  
+  var mpos = viewPosition;
+  var ctr = paper.view.center;
+  
+  var pc = mpos.subtract(ctr);
+  var offset = mpos.subtract(pc.multiply(beta)).subtract(ctr);	
+  
+  paper.view.zoom = newZoom;
+  paper.view.center = paper.view.center.add(offset);
+  
+  event.preventDefault();
+  paper.view.draw();			
+  updateGUI();
+});
+
+$("#reset-zoom-button").on("click", function(e) {
+  paper.view.zoom = 1;
+  paper.view.center = [paper.view.bounds.width/2, paper.view.bounds.height/2]
+  $("#reset-zoom-button").addClass("hidden");
+  $("#zoomin-button").removeClass("hidden");
+  $("#zoomout-button").removeClass("hidden");
 });

@@ -1,0 +1,176 @@
+<!DOCTYPE !html>
+<html>
+
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+
+    <!-- Google fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Pattaya&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet"
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+</head>
+
+<style>
+    body {
+        background-image: url('./images/background.png');
+        background-repeat: no-repeat;
+        background-size: cover
+    }
+
+    #page-header {
+        font-family: 'Pattaya', sans-serif;
+    }
+
+    #share-button {
+        background-color: lightgray;
+        border-color: lightgray;
+        border-radius: 30px;
+        letter-spacing: 0.7px;
+        color: grey;
+    }
+
+    #share-button:active,
+    #share-button:focus,
+    #share-button:hover {
+        background-color: #E599FF;
+        border-color: #E599FF;
+        border-radius: 30px;
+        letter-spacing: 0.7px;
+        color: white;
+        font-weight: bold;
+    }
+
+    .card {
+        border: 0px;
+        overflow: hidden;
+    }
+
+    .card img {
+        transition: all .9s ease;
+    }
+
+    .card:hover img {
+        -webkit-transform: scale(1.05);
+        -moz-transform: scale(1.05);
+        -ms-transform: scale(1.05);
+        -o-transform: scale(1.05);
+        transform: scale(1.05);
+    }
+</style>
+
+<body>
+    <br><br>
+    <div class="container-fluid" id="page-header" style="width: 85%">
+        <h1><a href="index.html" span class="material-symbols-outlined"
+                style="color: black; text-decoration: none;">arrow_back_ios</a>&nbsp;&nbsp;Portfolio</h1>
+    </div>
+    <br>
+    <div class="container-fluid" style="width: 85%">
+        <div class="row row-cols-1 row-cols-md-3 g-5">
+            <div class="col">
+                <div class="shadow card h-100 hover-zoom">
+                    <!-- Credit: Grumpy Monster Group; Lion -->
+                    <img src="./images/lion.jpg" class="card-img-top" alt="lion">
+                    <div class="card-body d-flex">
+                        <h6 class="card-title">7/8/2022</h6>
+                        <span class="ms-auto"><button type="button" id="share-button" class="btn btn-sm"
+                                data-bs-toggle="modal" data-bs-target="#submitModal">Share</button></span>
+                    </div>
+                </div>
+            </div>
+            <div class="col">
+                <div class="shadow card h-100">
+                    <!-- Credit: Grumpy Monster Group; Buildings -->
+                    <img src="./images/buildings.png" class="card-img-top" alt="buildings">
+                    <div class="card-body d-flex">
+                        <h6 class="card-title">6/29/2022</h6>
+                        <span class="ms-auto"><button type="button" id="share-button" class="btn btn-sm"
+                                data-bs-toggle="modal" data-bs-target="#submitModal">Share</button></span>
+                    </div>
+                </div>
+            </div>
+            <div class="col">
+                <div class="shadow card h-100">
+                    <!-- Credit: Grumpy Monster Group; Doodles -->
+                    <img src="./images/doodles.jpg" class="card-img-top" alt="doodles">
+                    <div class="card-body d-flex">
+                        <h6 class="card-title">3/1/2022</h6>
+                        <span class="ms-auto"><button type="button" id="share-button" class="btn btn-sm"
+                                data-bs-toggle="modal" data-bs-target="#submitModal">Share</button></span>
+                    </div>
+                </div>
+            </div>
+            <div class="col">
+                <div class="shadow card h-100">
+                    <!-- Credit: Grumpy Monster Group; Abstract -->
+                    <img src="./images/abstract.jpg" class="card-img-top" alt="abstract">
+                    <div class="card-body d-flex">
+                        <h6 class="card-title">2/14/2022</h6>
+                        <span class="ms-auto"><button type="button" id="share-button" class="btn btn-sm"
+                                data-bs-toggle="modal" data-bs-target="#submitModal">Share</button></span>
+                    </div>
+                </div>
+            </div>
+            <div class="col">
+                <div class="shadow card h-100">
+                    <!-- Credit: Grumpy Monster Group; Numbers -->
+                    <img src="./images/numbers.jpg" class="card-img-top" alt="numbers">
+                    <div class="card-body d-flex">
+                        <h6 class="card-title">12/11/2021</h6>
+                        <span class="ms-auto"><button type="button" id="share-button" class="btn btn-sm"
+                                data-bs-toggle="modal" data-bs-target="#submitModal">Share</button></span>
+                    </div>
+                </div>
+            </div>
+            <div class="col">
+                <div class="shadow card h-100">
+                    <!-- Credit: Grumpy Monster Group; Strawberry -->
+                    <img src="./images/strawberry.jpg" class="card-img-top" alt="strawberry">
+                    <div class="card-body d-flex">
+                        <h6 class="card-title">10/31/2021</h6>
+                        <span class="ms-auto"><button type="button" id="share-button" class="btn btn-sm"
+                                data-bs-toggle="modal" data-bs-target="#submitModal">Share</button></span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal fade" id="submitModal" tabindex="-1" aria-labelledby="submitModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header border-0">
+                    <h5 class="modal-title" id="exampleModalLabel"></h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body text-center">
+                    <br><br>
+                    <svg xmlns="http://www.w3.org/2000/svg" width="70" height="70" fill="#E599FF"
+                        class="bi bi-emoji-kiss" viewBox="0 0 16 16">
+                        <path fill-rule="evenodd"
+                            d="M12.493 13.368a7 7 0 1 1 2.489-4.858c.344.033.68.147.975.328a8 8 0 1 0-2.654 5.152 8.58 8.58 0 0 1-.81-.622Zm-3.731-3.22a13 13 0 0 0-1.107.318.5.5 0 1 1-.31-.95c.38-.125.802-.254 1.192-.343.37-.086.78-.153 1.103-.108.16.022.394.085.561.286.188.226.187.497.131.705a1.892 1.892 0 0 1-.31.593c-.077.107-.168.22-.275.343.107.124.199.24.276.347.142.197.256.397.31.595.055.208.056.479-.132.706-.168.2-.404.262-.563.284-.323.043-.733-.027-1.102-.113a14.87 14.87 0 0 1-1.191-.345.5.5 0 1 1 .31-.95c.371.12.761.24 1.109.321.176.041.325.069.446.084a5.609 5.609 0 0 0-.502-.584.5.5 0 0 1 .002-.695 5.52 5.52 0 0 0 .5-.577 4.465 4.465 0 0 0-.448.082Zm.766-.087-.003-.001-.003-.001c.004 0 .006.002.006.002Zm.002 1.867-.006.001a.038.038 0 0 1 .006-.002ZM6 8c.552 0 1-.672 1-1.5S6.552 5 6 5s-1 .672-1 1.5S5.448 8 6 8Zm2.757-.563a.5.5 0 0 0 .68-.194.934.934 0 0 1 .813-.493c.339 0 .645.19.813.493a.5.5 0 0 0 .874-.486A1.934 1.934 0 0 0 10.25 5.75c-.73 0-1.356.412-1.687 1.007a.5.5 0 0 0 .194.68ZM14 9.828c1.11-1.14 3.884.856 0 3.422-3.884-2.566-1.11-4.562 0-3.421Z" />
+                    </svg>
+                    <h3><b>Woo-hoo!</b></h3>
+                    <p>Just uploaded your work!</p>
+                    <br><br>
+                </div>
+                <div class="modal-footer border-0">
+                </div>
+            </div>
+        </div>
+    </div>
+    <br><br><br>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
+        crossorigin="anonymous"></script>
+</body>
+
+</html>

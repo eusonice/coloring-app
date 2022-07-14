@@ -260,7 +260,7 @@ function toggleButton(button, message = undefined) {
 // bind color buttons with current storage
 export function bindColorButtons() {
   const customColors = JSON.parse(getStorage("preset-colors"));
-  if (customColors.length > 0) {
+  if (customColors && customColors.length > 0) {
     keyboardJS.withContext("picker", () => {
       for (let i = 1; i <= Math.min(customColors.length, 10); i++) {
         const k = i === 10 ? "0" : i;
@@ -294,15 +294,38 @@ keyboardJS.bind("mod + s", (e) => {
 // Hint: check out the zoom in and zoom out shortcuts
 keyboardJS.bind("mod + z", (e) => {
   e.preventDefault();
-  RUHandler.handle(new window.RUEvent(window.RUType.undo));
   toast("Undo Stroke");
 });
 
 // SHORTCUT --- redo --- mod + shift + z
+keyboardJS.bind("mod + shift + z", (e) => {
+  e.preventDefault();
+  toast("Redo Stroke");
+});
 
 // SHORTCUT --- brush tool --- b
+keyboardJS.bind("b", (e) => {
+  e.preventDefault();
+  const brushButton = $("#brush");
+  brushButton.click();
+  brushButton.addClass("active");
+  $("#eraser").removeClass("active");
+  $(".slider-wrap.slider-eraser").addClass("hidden");
+  $(".slider-wrap.slider-brush").removeClass("hidden");
+  toast("Brush Tool");
+});
 
 // SHORTCUT --- eraser tool --- e
+keyboardJS.bind("e", (e) => {
+  e.preventDefault();
+  const eraserButton = $("#eraser");
+  eraserButton.click();
+  eraserButton.addClass("active");
+  $("#brush").removeClass("active");
+  $(".slider-wrap.slider-brush").addClass("hidden");
+  $(".slider-wrap.slider-eraser").removeClass("hidden");
+  toast("Eraser Tool");
+});
 
 // SHORTCUT --- color picker --- c
 // Hint: menapulate a click event on the color picker
@@ -353,26 +376,106 @@ keyboardJS.bind(["up", "w"], (e) => {
 });
 
 // SHORTCUT --- increase brush height by 10 --- shift + arrow up, shift + w
+keyboardJS.bind(["shift + up", "shift + w"], (e) => {
+  e.preventDefault();
+  // Get the current brush height from the DOM
+  const currentValue = $("#slider-height").val();
+  // Update the slider value (convert to int)
+  updateSlider("height", Number(currentValue) + 10, false);
+  toast("Brush height + 10");
+});
 
 // SHORTCUT --- decrease brush height by 5 --- arrow down, s
+keyboardJS.bind(["down", "s"], (e) => {
+  e.preventDefault();
+  // Get the current brush height from the DOM
+  const currentValue = $("#slider-height").val();
+  // Update the slider value (convert to int)
+  updateSlider("height", Number(currentValue) - 5, false);
+  toast("Brush height - 5");
+});
 
 // SHORTCUT --- decrease brush height by 10 --- shift + arrow down, shift + s
+keyboardJS.bind(["shift + down", "shift + s"], (e) => {
+  e.preventDefault();
+  // Get the current brush height from the DOM
+  const currentValue = $("#slider-height").val();
+  // Update the slider value (convert to int)
+  updateSlider("height", Number(currentValue) - 10, false);
+  toast("Brush height - 10");
+});
 
 // SHORTCUT --- decrease brush width by 5 --- arrow left, a
+keyboardJS.bind(["left", "a"], (e) => {
+  e.preventDefault();
+  // Get the current brush height from the DOM
+  const currentValue = $("#slider-width").val();
+  // Update the slider value (convert to int)
+  updateSlider("width", Number(currentValue) - 5, false);
+  toast("Brush width - 5");
+});
 
 // SHORTCUT --- decrease brush width by 10 --- shift + arrow left, shift + a
+keyboardJS.bind(["shift + left", "shift + a"], (e) => {
+  e.preventDefault();
+  // Get the current brush height from the DOM
+  const currentValue = $("#slider-width").val();
+  // Update the slider value (convert to int)
+  updateSlider("width", Number(currentValue) - 10, false);
+  toast("Brush width - 10");
+});
 
 // SHORTCUT --- increase brush width by 5 --- arrow right, d
+keyboardJS.bind(["right", "d"], (e) => {
+  e.preventDefault();
+  // Get the current brush height from the DOM
+  const currentValue = $("#slider-width").val();
+  // Update the slider value (convert to int)
+  updateSlider("width", Number(currentValue) + 5, false);
+  toast("Brush width + 5");
+});
 
 // SHORTCUT --- increase brush width by 10 --- shift + arrow right, shift + d
+keyboardJS.bind(["shift + right", "shift + d"], (e) => {
+  e.preventDefault();
+  // Get the current brush height from the DOM
+  const currentValue = $("#slider-width").val();
+  // Update the slider value (convert to int)
+  updateSlider("width", Number(currentValue) + 10, false);
+  toast("Brush width + 10");
+});
 
 // SHORTCUT --- increase brush angle by 5 --- e
+keyboardJS.bind("alt + e", (e) => {
+  e.preventDefault();
+  const currentValue = $("#slider-angle").val();
+  updateSlider("angle", Number(currentValue) + 5, false);
+  toast("Brush angle + 5");
+});
 
 // SHORTCUT --- increase brush angle by 15 --- shift + e
+keyboardJS.bind("shift + e", (e) => {
+  e.preventDefault();
+  const currentValue = $("#slider-angle").val();
+  updateSlider("angle", Number(currentValue) + 15, false);
+  toast("Brush angle + 15");
+});
 
 // SHORTCUT --- decrease brush angle by 5 --- q
+keyboardJS.bind("q", (e) => {
+  e.preventDefault();
+  const currentValue = $("#slider-angle").val();
+  updateSlider("angle", Number(currentValue) - 5, false);
+  toast("Brush angle - 5");
+});
 
 // SHORTCUT --- decrease brush angle by 15 --- shift + q
+keyboardJS.bind("shift + q", (e) => {
+  e.preventDefault();
+  const currentValue = $("#slider-angle").val();
+  updateSlider("angle", Number(currentValue) - 15, false);
+  toast("Brush angle - 15");
+});
 
 // SHORTCUT --- help (?) --- shift + /
 
