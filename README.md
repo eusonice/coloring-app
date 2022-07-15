@@ -1,6 +1,6 @@
 # Coloring Book App 🎨
 
-https://user-images.githubusercontent.com/13263720/179155900-580c6adf-eccb-4ce7-96d8-a3516441fe8f.mp4
+https://user-images.githubusercontent.com/13263720/179158592-24d0dc9b-d272-4fcf-90ae-0025b0e772b0.mp4
 
 ## Features
 
