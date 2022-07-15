@@ -33,14 +33,20 @@ app.use(express.static(publicPath));  //tell express to use that folder
 router.get("/", function (req, res) {
     res.sendFile(path.join(__dirname, "/"));
 });
+app.get('/templates', function (req, res) {
+  res.sendFile(publicPath + '/templates.html');
+});
 app.get('/canvas', function (req, res) {
   res.sendFile(publicPath + '/canvas.html');
 });
+app.get('/portfolio', function (req, res) {
+  res.sendFile(publicPath + '/portfolio.html');
+});
+app.get('/community', function (req, res) {
+  res.sendFile(publicPath + '/community.html');
+});
 app.get('/popular', function (req, res) {
   res.sendFile(publicPath + '/popular.html');
-});
-app.get('/home', function (req, res) {
-  res.sendFile(publicPath + '/home.html');
 });
 
 
