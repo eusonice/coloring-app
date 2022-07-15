@@ -1,6 +1,7 @@
 * {
   box-sizing: border-box;
 }
+
 body { /*default body style (black Verdana)*/
   font-family:Verdana;
   color:#000000; 
