@@ -1,5 +1,7 @@
 # Coloring Book App 🎨
 
+https://user-images.githubusercontent.com/13263720/179155900-580c6adf-eccb-4ce7-96d8-a3516441fe8f.mp4
+
 ## Features
 
 * Color picker
